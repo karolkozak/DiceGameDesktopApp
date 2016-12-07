@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.ListOfGamesController">
+   <children>
+      <TableView id="listOfGames" layoutX="89.0" layoutY="44.0" prefHeight="257.0" prefWidth="422.0">
+        <columns>
+          <TableColumn prefWidth="139.0" text="Nazwa" />
+          <TableColumn prefWidth="136.0" text="Rodzaj" />
+            <TableColumn prefWidth="146.0" text="Liczba miejsc" />
+        </columns>
+      </TableView>
+      <Button id="update" layoutX="89.0" layoutY="324.0" mnemonicParsing="false" onAction="#handleUpdateAction" text="Aktualizuj listę">
+         <font>
+            <Font size="14.0" />
+         </font></Button>
+      <Button id="join" layoutX="228.0" layoutY="324.0" mnemonicParsing="false" onAction="#handleJoinAction" text="Dołącz">
+         <font>
+            <Font size="14.0" />
+         </font></Button>
+      <Button id="watch" layoutX="319.0" layoutY="324.0" mnemonicParsing="false" onAction="#handleWatchAction" text="Obserwuj">
+         <font>
+            <Font size="14.0" />
+         </font></Button>
+      <Button id="createGame" layoutX="425.0" layoutY="324.0" mnemonicParsing="false" onAction="#handleCreateGameAction" text="Stwórz grę">
+         <font>
+            <Font size="14.0" />
+         </font></Button>
+   </children>
+</Pane>
