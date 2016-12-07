@@ -1,4 +1,4 @@
-package sample;
+package com.dicegame.controllers;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -23,7 +23,7 @@ public class LoginController implements Initializable {
 
     @FXML
     public void handleLoginAction(ActionEvent actionEvent) throws IOException {
-        Parent createGame = FXMLLoader.load(getClass().getResource("listOfGames.fxml"));
+        Parent createGame = FXMLLoader.load(getClass().getResource("../view/listOfGames.fxml"));
         Scene home_page = new Scene(createGame);
         Stage app_stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
         app_stage.setScene(home_page);

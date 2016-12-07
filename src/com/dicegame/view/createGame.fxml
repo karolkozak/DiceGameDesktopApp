@@ -11,10 +11,9 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.CreateGameController">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.dicegame.controllers.CreateGameController">
    <children>
-      <Button layoutX="121.0" layoutY="322.0" mnemonicParsing="false" text="Stwórz grę" onAction="#handleCreateGameAction">
+      <Button layoutX="164.0" layoutY="323.0" mnemonicParsing="false" onAction="#handleCreateGameAction" text="Stwórz grę">
          <font>
             <Font size="14.0" />
          </font>
@@ -34,12 +33,12 @@
             <Font size="14.0" />
          </font>
       </Label>
-      <TextField layoutX="133.0" layoutY="77.0" promptText="podaj nazwe" fx:id="giveName"/>
-      <ComboBox layoutX="132.0" layoutY="139.0" prefWidth="150.0" fx:id="modeComboBox"/>
-      <Spinner layoutX="133.0" layoutY="190.0" fx:id="numberOfPlayersSpinner"/>
+      <TextField fx:id="giveName" layoutX="141.0" layoutY="77.0" promptText="podaj nazwe" />
+      <ComboBox fx:id="modeComboBox" layoutX="140.0" layoutY="139.0" prefWidth="150.0" />
+      <Spinner fx:id="numberOfPlayersSpinner" layoutX="141.0" layoutY="190.0" />
       <ScrollPane layoutX="341.0" layoutY="51.0" prefHeight="200.0" prefWidth="200.0">
          <content>
-            <TableView prefHeight="200.0" prefWidth="200.0" fx:id="botsList">
+            <TableView fx:id="botsList" prefHeight="200.0" prefWidth="200.0">
               <columns>
                 <TableColumn prefWidth="75.0" text="Bot" />
                 <TableColumn prefWidth="75.0" text="Poziom" />
@@ -52,17 +51,28 @@
             <Font size="14.0" />
          </font>
       </Label>
-      <ComboBox layoutX="402.0" layoutY="274.0" prefWidth="150.0" fx:id="botLevel"/>
+      <ComboBox fx:id="botLevel" layoutX="402.0" layoutY="274.0" prefWidth="150.0" />
       <Label layoutX="315.0" layoutY="305.0" text="Nazwa bota:">
          <font>
             <Font size="14.0" />
          </font>
       </Label>
-      <TextField layoutX="403.0" layoutY="303.0" promptText="nazwa bota" fx:id="botName"/>
-      <Button layoutX="387.0" layoutY="337.0" mnemonicParsing="false" text="Dodaj bota" onAction="#handleAddBotAction">
+      <TextField fx:id="botName" layoutX="403.0" layoutY="303.0" promptText="nazwa bota" />
+      <Button layoutX="387.0" layoutY="337.0" mnemonicParsing="false" onAction="#handleAddBotAction" text="Dodaj bota">
          <font>
             <Font size="14.0" />
          </font>
       </Button>
+      <Button id="back" layoutX="50.0" layoutY="325.0" mnemonicParsing="false" onAction="#handleBackAction" text="Wstecz">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Button>
+      <Label layoutX="36.0" layoutY="241.0" text="Liczba punktów">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <TextField layoutX="141.0" layoutY="239.0" promptText="points" fx:id="points"/>
    </children>
 </Pane>

@@ -1,4 +1,4 @@
-package sample;
+package com.dicegame.model;
 
 /**
  * Created by Karol on 07/12/2016.

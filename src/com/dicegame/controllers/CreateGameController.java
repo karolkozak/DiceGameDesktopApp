@@ -1,13 +1,19 @@
-package sample;
+package com.dicegame.controllers;
 
+import com.dicegame.model.Row;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.stage.Stage;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -38,6 +44,9 @@ public class CreateGameController implements Initializable {
 
     @FXML
     private TextField giveName;
+
+    @FXML
+    private TextField points;
 
     @FXML
     public void handleCreateGameAction(ActionEvent actionEvent) {
@@ -88,4 +97,12 @@ public class CreateGameController implements Initializable {
     }
 
 
+    @FXML
+    public void handleBackAction(ActionEvent actionEvent) throws IOException {
+        Parent back = FXMLLoader.load(getClass().getResource("../view/listOfGames.fxml"));
+        Scene list_game_page = new Scene(back);
+        Stage back_stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
+        back_stage.setScene(list_game_page);
+        back_stage.show();
+    }
 }
