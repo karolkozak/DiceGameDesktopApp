@@ -32,10 +32,10 @@
       <Spinner fx:id="numberOfPlayersSpinner" layoutX="141.0" layoutY="190.0" />
       <ScrollPane layoutX="341.0" layoutY="51.0" prefHeight="200.0" prefWidth="200.0">
          <content>
-            <TableView fx:id="botsList" prefHeight="200.0" prefWidth="200.0">
+            <TableView fx:id="botsTable" prefHeight="200.0" prefWidth="200.0">
               <columns>
-                <TableColumn prefWidth="75.0" text="Bot" />
-                <TableColumn prefWidth="75.0" text="Poziom" />
+                <TableColumn fx:id="botNameColumn" prefWidth="75.0" text="Bot" />
+                <TableColumn fx:id="botLevelColumn" prefWidth="75.0" text="Poziom" />
               </columns>
             </TableView>
          </content>
