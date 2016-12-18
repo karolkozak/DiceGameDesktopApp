@@ -8,10 +8,10 @@ import java.util.List;
 public class GameState {
 
     private List<Player> listOfPlayers;
-    private String status;
+    private GameStatus status;
     private String activePlayer;
 
-    public GameState(List<Player> listOfPlayers, String status) {
+    public GameState(List<Player> listOfPlayers, GameStatus status) {
         this.listOfPlayers = listOfPlayers;
         this.status = status;
     }

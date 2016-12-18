@@ -43,25 +43,21 @@ public class CreateGameController implements Initializable {
     private TextField botName;
 
     @FXML
-    private TextField giveName;
-
-    @FXML
     private TextField points;
 
     @FXML
     public void handleCreateGameAction(ActionEvent actionEvent) {
-        String gameName = giveName.getText();
         String gameMode = modeComboBox.getValue();
         Integer numOfPlayers = (Integer)numberOfPlayersSpinner.getValue();
     }
 
     @FXML
     public void handleAddBotAction(ActionEvent actionEvent) {
-//        TableColumn botCol = new TableColumn("Bot");
+//        TableColumn botCol = new TableColumn("BotConfiguration");
 //        String bot = botName.getText();
 //        botCol.setCellValueFactory(new PropertyValueFactory<>(bot));        //???????????????????????????
 //
-//        TableColumn levelCol = new TableColumn("Bot");
+//        TableColumn levelCol = new TableColumn("BotConfiguration");
 //        String level = botLevel.getValue();
 //        levelCol.setCellValueFactory(new PropertyValueFactory<>(level));        //???????????????????????????
 //

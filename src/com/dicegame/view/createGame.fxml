@@ -18,11 +18,6 @@
             <Font size="14.0" />
          </font>
       </Button>
-      <Label layoutX="36.0" layoutY="79.0" text="Podaj nazwę:">
-         <font>
-            <Font size="14.0" />
-         </font>
-      </Label>
       <Label layoutX="36.0" layoutY="141.0" text="Wybierz tryb:">
          <font>
             <Font size="14.0" />
@@ -33,7 +28,6 @@
             <Font size="14.0" />
          </font>
       </Label>
-      <TextField fx:id="giveName" layoutX="141.0" layoutY="77.0" promptText="podaj nazwe" />
       <ComboBox fx:id="modeComboBox" layoutX="140.0" layoutY="139.0" prefWidth="150.0" />
       <Spinner fx:id="numberOfPlayersSpinner" layoutX="141.0" layoutY="190.0" />
       <ScrollPane layoutX="341.0" layoutY="51.0" prefHeight="200.0" prefWidth="200.0">
@@ -73,6 +67,6 @@
             <Font size="14.0" />
          </font>
       </Label>
-      <TextField layoutX="141.0" layoutY="239.0" promptText="points" fx:id="points"/>
+      <TextField fx:id="points" layoutX="141.0" layoutY="239.0" promptText="points" />
    </children>
 </Pane>
