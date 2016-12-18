@@ -1,5 +1,6 @@
 package com.dicegame.model;
 
+import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 
 /**
@@ -8,19 +9,19 @@ import javafx.beans.property.SimpleStringProperty;
 public class BotConfiguration {
 
     private String name;
-    private String botLevel;
+    private BotLevel botLevel;
 
-    public BotConfiguration(String name, String botLevel) {
+    public BotConfiguration(String name, BotLevel botLevel) {
         this.name = name;
         this.botLevel = botLevel;
     }
 
-    public SimpleStringProperty getBotNamePropertie(){
+    public SimpleStringProperty getBotNameProperties(){
         return new SimpleStringProperty(name);
     }
 
-    public SimpleStringProperty getBotLevelPropertie(){
-        return new SimpleStringProperty(botLevel);
+    public SimpleObjectProperty getBotLevelProperties(){
+        return new SimpleObjectProperty<BotLevel>(botLevel);
     }
 
 }

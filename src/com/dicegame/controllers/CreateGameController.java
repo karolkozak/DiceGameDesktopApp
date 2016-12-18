@@ -1,5 +1,4 @@
 package com.dicegame.controllers;
-
 import com.dicegame.model.BotConfiguration;
 import com.dicegame.model.BotLevel;
 import javafx.collections.FXCollections;
@@ -62,11 +61,20 @@ public class CreateGameController implements Initializable {
     @FXML
     public void handleAddBotAction(ActionEvent actionEvent) {
 
-        String bot = botName.getText();
+        String name = botName.getText();
         String level = botLevel.getValue();
+        BotLevel bLevel;
 
-        bots.add(new BotConfiguration("ADAM","EASY"));
+        if (level == "Mistrz")  bLevel = BotLevel.MASTER;
+        else bLevel = BotLevel.EASY;
+
+        bots.add(new BotConfiguration(name, bLevel));
         botsTable.setItems(bots);
+    }
+
+    @FXML
+    public void handleRemoveBotAction(ActionEvent actionEvent) {
+        botsTable.getItems().removeAll(botsTable.getSelectionModel().getSelectedItem());
     }
 
     @Override
@@ -86,8 +94,8 @@ public class CreateGameController implements Initializable {
 
         botLevel.setItems(botLevelItems);
 
-        botNameColumn.setCellValueFactory(dataValue -> dataValue.getValue().getBotNamePropertie());
-        botLevelColumn.setCellValueFactory(dataValue -> dataValue.getValue().getBotLevelPropertie());
+        botNameColumn.setCellValueFactory(dataValue -> dataValue.getValue().getBotNameProperties());
+        botLevelColumn.setCellValueFactory(dataValue -> dataValue.getValue().getBotLevelProperties());
 
 
         botsTable.setEditable(false);
