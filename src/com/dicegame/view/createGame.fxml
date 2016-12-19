@@ -32,10 +32,10 @@
       <Spinner fx:id="numberOfPlayersSpinner" layoutX="141.0" layoutY="190.0" />
       <ScrollPane layoutX="341.0" layoutY="51.0" prefHeight="200.0" prefWidth="200.0">
          <content>
-            <TableView fx:id="botsList" prefHeight="200.0" prefWidth="200.0">
+            <TableView fx:id="botsTable" prefHeight="200.0" prefWidth="200.0">
               <columns>
-                <TableColumn prefWidth="75.0" text="Bot" />
-                <TableColumn prefWidth="75.0" text="Poziom" />
+                <TableColumn fx:id="botNameColumn" prefWidth="75.0" text="Bot" />
+                <TableColumn fx:id="botLevelColumn" prefWidth="75.0" text="Poziom" />
               </columns>
             </TableView>
          </content>
@@ -52,7 +52,7 @@
          </font>
       </Label>
       <TextField fx:id="botName" layoutX="403.0" layoutY="303.0" promptText="nazwa bota" />
-      <Button layoutX="387.0" layoutY="337.0" mnemonicParsing="false" onAction="#handleAddBotAction" text="Dodaj bota">
+      <Button layoutX="342.0" layoutY="338.0" mnemonicParsing="false" onAction="#handleAddBotAction" text="Dodaj bota">
          <font>
             <Font size="14.0" />
          </font>
@@ -68,5 +68,10 @@
          </font>
       </Label>
       <TextField fx:id="points" layoutX="141.0" layoutY="239.0" promptText="points" />
+      <Button  layoutX="455.0" layoutY="338.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="89.0" onAction="#handleRemoveBotAction" text="Usuń bota">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Button>
    </children>
 </Pane>

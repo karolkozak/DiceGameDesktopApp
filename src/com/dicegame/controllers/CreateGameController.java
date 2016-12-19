@@ -1,6 +1,6 @@
 package com.dicegame.controllers;
-
-import com.dicegame.model.Row;
+import com.dicegame.model.BotConfiguration;
+import com.dicegame.model.BotLevel;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -11,6 +11,7 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -34,10 +35,16 @@ public class CreateGameController implements Initializable {
     private ObservableList<String> botLevelItems = FXCollections.observableArrayList();
 
     @FXML
-    private TableView botsList;
-    private ObservableList<Row> items = FXCollections.observableArrayList(
-            new Row("A", "Z")
-    );
+    private TableView botsTable;
+
+    @FXML
+    private TableColumn<BotConfiguration, String> botNameColumn;
+
+    @FXML
+    private TableColumn<BotConfiguration, String> botLevelColumn;
+
+    private ObservableList<BotConfiguration> bots = FXCollections.observableArrayList();
+
 
     @FXML
     private TextField botName;
@@ -53,22 +60,21 @@ public class CreateGameController implements Initializable {
 
     @FXML
     public void handleAddBotAction(ActionEvent actionEvent) {
-//        TableColumn botCol = new TableColumn("BotConfiguration");
-//        String bot = botName.getText();
-//        botCol.setCellValueFactory(new PropertyValueFactory<>(bot));        //???????????????????????????
-//
-//        TableColumn levelCol = new TableColumn("BotConfiguration");
-//        String level = botLevel.getValue();
-//        levelCol.setCellValueFactory(new PropertyValueFactory<>(level));        //???????????????????????????
-//
-//        botsList.getColumns().addAll(botCol, levelCol);
 
-        String bot = botName.getText();
+        String name = botName.getText();
         String level = botLevel.getValue();
+        BotLevel bLevel;
 
-        //botsList.getItems();
-        //items.add(new Row(bot, level));
-        botsList.setItems(items);  //?????
+        if (level == "Mistrz")  bLevel = BotLevel.MASTER;
+        else bLevel = BotLevel.EASY;
+
+        bots.add(new BotConfiguration(name, bLevel));
+        botsTable.setItems(bots);
+    }
+
+    @FXML
+    public void handleRemoveBotAction(ActionEvent actionEvent) {
+        botsTable.getItems().removeAll(botsTable.getSelectionModel().getSelectedItem());
     }
 
     @Override
@@ -88,8 +94,12 @@ public class CreateGameController implements Initializable {
 
         botLevel.setItems(botLevelItems);
 
-        botsList.setEditable(false);
-        botsList.setItems(items); //???
+        botNameColumn.setCellValueFactory(dataValue -> dataValue.getValue().getBotNameProperties());
+        botLevelColumn.setCellValueFactory(dataValue -> dataValue.getValue().getBotLevelProperties());
+
+
+        botsTable.setEditable(false);
+        botsTable.setItems(bots);
     }
 
 

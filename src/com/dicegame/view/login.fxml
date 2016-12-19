@@ -22,6 +22,6 @@
                 <Font size="14.0" />
             </font>
         </Label>
-        <TextField layoutX="225.0" layoutY="257.0" promptText="login" />
+        <TextField fx:id="nickField" layoutX="225.0" layoutY="257.0" promptText="login" />
     </children>
 </Pane>
