@@ -1,9 +1,11 @@
-package com.dicegame.interfaces;
+package com.dicegame.controllers;
+
+import com.dicegame.interfaces.Requestable;
 
 /**
  * Created by Jakub on 2016-12-18.
  */
-public class Request implements Requestable{
+public class RequestController implements Requestable {
     @Override
     public void getAvailableGames() {
 
