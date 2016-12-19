@@ -70,6 +70,7 @@ public class CreateGameController implements Initializable {
 
         bots.add(new BotConfiguration(name, bLevel));
         botsTable.setItems(bots);
+        botName.setText("");
     }
 
     @FXML

@@ -7,11 +7,9 @@ import java.util.Set;
  */
 public class Move {
 
-    private MoveType moveType;
     private Set<Integer> diceNumbers;
 
-    public Move(MoveType moveType, Set<Integer> diceNumbers) {
-        this.moveType = moveType;
+    public Move( Set<Integer> diceNumbers) {
         this.diceNumbers = diceNumbers;
     }
 }
