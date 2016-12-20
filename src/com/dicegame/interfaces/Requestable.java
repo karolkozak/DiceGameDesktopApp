@@ -12,13 +12,12 @@ import java.util.List;
 public interface Requestable {
 
     List<Game> getAvailableGames();
-    void login(String nick);
+    boolean login(String nick);
     List<Integer> rollDice(Move move);
-    void joinGame(Game game);
-    void spectateGame(Game game);
-    void exitGame();
-    void createGame(Configuration config);
-
+    boolean joinGame(Game game);
+    boolean spectateGame(Game game);
+    boolean exitGame();
+    boolean createGame(Configuration config);
 
 
 }

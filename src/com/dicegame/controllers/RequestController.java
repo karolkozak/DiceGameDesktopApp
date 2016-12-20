@@ -11,16 +11,14 @@ import java.util.List;
  * Created by Jakub on 2016-12-18.
  */
 public class RequestController implements Requestable {
-
-
     @Override
     public List<Game> getAvailableGames() {
         return null;
     }
 
     @Override
-    public void login(String nick) {
-
+    public boolean login(String nick) {
+        return false;
     }
 
     @Override
@@ -29,24 +27,24 @@ public class RequestController implements Requestable {
     }
 
     @Override
-    public void joinGame(Game game) {
-
+    public boolean joinGame(Game game) {
+        return false;
     }
 
     @Override
-    public void spectateGame(Game game) {
-
+    public boolean spectateGame(Game game) {
+        return false;
     }
 
     @Override
-    public void exitGame() {
-
+    public boolean exitGame() {
+        return false;
     }
 
     @Override
-    public void createGame(Configuration config) {
-
-    }
-
+    public boolean createGame(Configuration config) {
+        return false;
+    }//JMS SHIT
+    
 
 }
