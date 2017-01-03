@@ -51,4 +51,5 @@ public class LoginController implements Initializable {
     private boolean isValid(String nick){
         return true;
     }
+
 }
