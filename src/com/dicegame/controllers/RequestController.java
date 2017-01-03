@@ -45,6 +45,6 @@ public class RequestController implements Requestable {
     public boolean createGame(Configuration config) {
         return false;
     }//JMS SHIT
-    
+
 
 }
