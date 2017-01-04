@@ -6,14 +6,17 @@ package com.dicegame.model;
 public class Game {
 
     private int gameID;
-    private String gameName;
     private GameType gameType;
-    private int leftPlaces;
+    private int placesLeft;
+    private GameState gameState;
 
-    public Game(String gameName, GameType gameType, int leftPlaces) {
-        this.gameName = gameName;
+    public Game(GameType gameType, int placesLeft) {
         this.gameType = gameType;
-        this.leftPlaces = leftPlaces;
+        this.placesLeft = placesLeft;
+    }
+
+    public void setGameState(GameState gameState) {
+        this.gameState = gameState;
     }
 
     //get from logic

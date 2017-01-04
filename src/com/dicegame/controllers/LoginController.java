@@ -1,6 +1,7 @@
 package com.dicegame.controllers;
 
 import com.dicegame.interfaces.Requestable;
+import com.dicegame.model.Account;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -35,6 +36,10 @@ public class LoginController implements Initializable {
 
             try {
                 serverCommunicator.login(nick);
+
+                //create Account
+                Account userAccount = Account.getInstance();
+                userAccount.setNick(nick);
             }
             catch (Exception e){
 

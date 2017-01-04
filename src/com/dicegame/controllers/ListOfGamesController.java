@@ -25,6 +25,9 @@ public class ListOfGamesController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         //get data from server and show in table
+
+        //receives: ListOfGames
+
     }
 
     @FXML
