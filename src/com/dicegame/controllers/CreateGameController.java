@@ -61,26 +61,18 @@ public class CreateGameController implements Initializable {
     @FXML
     public void handleAddBotAction(ActionEvent actionEvent) {
 
-        if(!botName.getText().equals("")) {
+        String name = botName.getText();
+        if(!name.equals("") && isValid(name) && !isAlreadyUsed(name)) {
 
-            String name = botName.getText();
             String level = botLevel.getValue();
             BotLevel bLevel;
 
             if (level == "Mistrz") bLevel = BotLevel.MASTER;
             else bLevel = BotLevel.EASY;
-
-            boolean nameAlreadyUsed = false;
-            for (BotConfiguration bot : bots) {
-                if (name.equals(bot.getName())) {
-                    nameAlreadyUsed = true;
-                }
-            }
-
-            if (!nameAlreadyUsed) {
-                bots.add(new BotConfiguration(name, bLevel));
-                botsTable.setItems(bots);
-            }
+            bots.add(new BotConfiguration(name, bLevel));
+            botsTable.setItems(bots);
+            botName.setText("");
+        }else{
             botName.setText("");
         }
     }
@@ -123,5 +115,19 @@ public class CreateGameController implements Initializable {
         Stage back_stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
         back_stage.setScene(list_game_page);
         back_stage.show();
+    }
+
+    private boolean isValid(String nick){
+        return nick.matches("[^!$()-+~#@*+%{}<>\\[\\]|\"_^/\\\\]*");
+    }
+
+    private boolean isAlreadyUsed(String name){
+        boolean nameAlreadyUsed = false;
+        for (BotConfiguration bot : bots) {
+            if (name.equals(bot.getName())) {
+                nameAlreadyUsed = true;
+            }
+        }
+        return nameAlreadyUsed;
     }
 }
