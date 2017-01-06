@@ -16,6 +16,10 @@ public class BotConfiguration {
         this.botLevel = botLevel;
     }
 
+    public String getName(){
+        return this.name;
+    }
+
     public SimpleStringProperty getBotNameProperties(){
         return new SimpleStringProperty(name);
     }

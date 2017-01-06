@@ -11,7 +11,6 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
-
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -35,14 +34,16 @@ public class LoginController implements Initializable {
         if(isValid(nick)) {
 
             try {
+                serverCommunicator = new RequestController();
                 serverCommunicator.login(nick);
 
                 //create Account
                 Account userAccount = Account.getInstance();
                 userAccount.setNick(nick);
+
             }
             catch (Exception e){
-
+                System.out.println(e);
             }
 
             Parent createGame = FXMLLoader.load(getClass().getResource("../view/listOfGames.fxml"));
@@ -50,11 +51,14 @@ public class LoginController implements Initializable {
             Stage app_stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
             app_stage.setScene(home_page);
             app_stage.show();
+
+        }else{
+            nickField.setText("");
         }
     }
 
     private boolean isValid(String nick){
-        return true;
+        return nick.matches("[^!$()-+~#@*+%{}<>\\[\\]|\"_^/\\\\]*");
     }
 
 }

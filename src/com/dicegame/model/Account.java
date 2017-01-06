@@ -11,17 +11,20 @@ public class Account {
     private Account(){}
 
     public static Account getInstance(){
+
         if(instance == null) {
             instance = new Account();
+
         }
+
         return instance;
     }
 
     public String getNick() {
-        return nick;
+        return instance.nick;
     }
 
     public void setNick(String nick) {
-        this.nick = nick;
+        instance.nick = nick;
     }
 }

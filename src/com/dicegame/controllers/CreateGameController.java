@@ -61,16 +61,28 @@ public class CreateGameController implements Initializable {
     @FXML
     public void handleAddBotAction(ActionEvent actionEvent) {
 
-        String name = botName.getText();
-        String level = botLevel.getValue();
-        BotLevel bLevel;
+        if(!botName.getText().equals("")) {
 
-        if (level == "Mistrz")  bLevel = BotLevel.MASTER;
-        else bLevel = BotLevel.EASY;
+            String name = botName.getText();
+            String level = botLevel.getValue();
+            BotLevel bLevel;
 
-        bots.add(new BotConfiguration(name, bLevel));
-        botsTable.setItems(bots);
-        botName.setText("");
+            if (level == "Mistrz") bLevel = BotLevel.MASTER;
+            else bLevel = BotLevel.EASY;
+
+            boolean nameAlreadyUsed = false;
+            for (BotConfiguration bot : bots) {
+                if (name.equals(bot.getName())) {
+                    nameAlreadyUsed = true;
+                }
+            }
+
+            if (!nameAlreadyUsed) {
+                bots.add(new BotConfiguration(name, bLevel));
+                botsTable.setItems(bots);
+            }
+            botName.setText("");
+        }
     }
 
     @FXML
