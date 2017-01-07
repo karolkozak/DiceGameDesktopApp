@@ -8,11 +8,11 @@
 
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.dicegame.controllers.ListOfGamesController">
    <children>
-      <TableView id="listOfGames" layoutX="89.0" layoutY="44.0" prefHeight="257.0" prefWidth="422.0">
+      <TableView fx:id="listOfGames" layoutX="89.0" layoutY="44.0" prefHeight="257.0" prefWidth="422.0">
         <columns>
-          <TableColumn prefWidth="117.0" text="Rodzaj" />
-            <TableColumn prefWidth="87.0" text="Liczba miejsc" />
-            <TableColumn prefWidth="217.0" text="Lista graczy" />
+            <TableColumn fx:id="gameTypeColumn" prefWidth="117.0" text="Rodzaj" />
+            <TableColumn fx:id="leftPlacesColumn" prefWidth="87.0" text="Liczba miejsc" />
+            <TableColumn fx:id="listOfPlayersColumn" prefWidth="217.0" text="Lista graczy" />
         </columns>
       </TableView>
       <Button id="update" layoutX="89.0" layoutY="324.0" mnemonicParsing="false" onAction="#handleUpdateAction" text="Aktualizuj listę">
