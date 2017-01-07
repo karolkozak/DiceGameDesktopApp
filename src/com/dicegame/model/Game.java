@@ -19,5 +19,15 @@ public class Game {
         this.gameState = gameState;
     }
 
-    //get from logic
+    public GameType getGameType() {
+        return gameType;
+    }
+
+    public int getPlacesLeft() {
+        return placesLeft;
+    }
+
+    public GameState getGameState() {
+        return gameState;
+    }
 }

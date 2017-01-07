@@ -11,9 +11,17 @@ public class Player {
     private int points;
     private List<Integer> dice;
 
+    public Player(String name) {
+        this.name = name;
+    }
+
     public Player(String name, int points, List<Integer> dice) {
         this.name = name;
         this.points = points;
         this.dice = dice;
+    }
+
+    public String toString() {
+        return name;
     }
 }
