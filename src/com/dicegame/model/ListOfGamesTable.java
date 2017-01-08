@@ -12,10 +12,10 @@ import java.util.List;
  * Created by Karol on 07/01/2017.
  */
 public class ListOfGamesTable {
-    GameType gametType;
-    Integer leftPlaces;
-    ObservableList<Player> observablelistOfPlayers;
-    List<Player> listOfPlayers;
+    private GameType gametType;
+    private Integer leftPlaces;
+    private ObservableList<Player> observablelistOfPlayers;
+    private List<Player> listOfPlayers;
 
 
     public ListOfGamesTable(GameType gametType, Integer leftPlaces, List<Player> listOfPlayers) {

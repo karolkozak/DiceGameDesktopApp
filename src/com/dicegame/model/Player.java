@@ -21,6 +21,18 @@ public class Player {
         this.dice = dice;
     }
 
+    public int getPoints() {
+        return points;
+    }
+
+    public List<Integer> getDice() {
+        return dice;
+    }
+
+    public String getName() {
+        return name;
+    }
+
     public String toString() {
         return name;
     }
