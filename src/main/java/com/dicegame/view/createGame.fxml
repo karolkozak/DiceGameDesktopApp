@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Spinner?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.dicegame.controllers.CreateGameController">
+   <children>
+      <Button layoutX="164.0" layoutY="323.0" mnemonicParsing="false" onAction="#handleCreateGameAction" text="Stwórz grę">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Button>
+      <Label layoutX="36.0" layoutY="141.0" text="Wybierz tryb:">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <Label layoutX="36.0" layoutY="192.0" text="Liczba graczy:">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <ComboBox fx:id="modeComboBox" layoutX="140.0" layoutY="139.0" prefWidth="150.0" />
+      <Spinner fx:id="numberOfPlayersSpinner" layoutX="141.0" layoutY="190.0" />
+      <TableView fx:id="botsTable" layoutX="300.0" layoutY="41.0" prefHeight="200.0" prefWidth="278.0">
+        <columns>
+          <TableColumn fx:id="botNameColumn" prefWidth="179.0" text="Bot" />
+          <TableColumn fx:id="botLevelColumn" prefWidth="98.0" text="Poziom" />
+        </columns>
+      </TableView>
+      <Label layoutX="315.0" layoutY="276.0" text="Dodaj bota:">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <ComboBox fx:id="botLevel" layoutX="402.0" layoutY="274.0" prefWidth="150.0" />
+      <Label layoutX="315.0" layoutY="305.0" text="Nazwa bota:">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <TextField fx:id="botName" layoutX="403.0" layoutY="303.0" promptText="nazwa bota" />
+      <Button layoutX="342.0" layoutY="338.0" mnemonicParsing="false" onAction="#handleAddBotAction" text="Dodaj bota">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Button>
+      <Button id="back" layoutX="50.0" layoutY="325.0" mnemonicParsing="false" onAction="#handleBackAction" text="Wstecz">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Button>
+      <Label layoutX="36.0" layoutY="241.0" text="Liczba punktów">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <TextField fx:id="points" layoutX="141.0" layoutY="239.0" promptText="points" />
+      <Button layoutX="455.0" layoutY="338.0" mnemonicParsing="false" onAction="#handleRemoveBotAction" prefHeight="30.0" prefWidth="89.0" text="Usuń bota">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Button>
+   </children>
+</Pane>
