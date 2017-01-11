@@ -5,24 +5,33 @@
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
 
-
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="422.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="422.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.dicegame.controllers.InGameController">
    <children>
-      <TableView layoutX="56.0" layoutY="34.0" prefHeight="321.0" prefWidth="369.0">
+      <TableView fx:id="resultsTable" layoutX="56.0" layoutY="34.0" prefHeight="321.0" prefWidth="369.0">
         <columns>
-          <TableColumn editable="false" prefWidth="106.0" sortable="false" text="Player" />
-          <TableColumn editable="false" prefWidth="120.0" sortable="false" text="Dice" />
-            <TableColumn editable="false" prefWidth="142.0" sortable="false" text="Points" />
+          <TableColumn fx:id="playerColumn" editable="false" prefWidth="106.0" sortable="false" text="Player" />
+          <TableColumn fx:id="diceColumn" editable="false" prefWidth="120.0" sortable="false" text="Dice" />
+            <TableColumn fx:id="pointsColumn" editable="false" prefWidth="142.0" sortable="false" text="Points" />
         </columns>
       </TableView>
-      <Button layoutX="454.0" layoutY="195.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="92.0" text="roll selected" />
+      <Button fx:id="roll" layoutX="454.0" layoutY="195.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="92.0" onAction="#handleRollAction" text="roll selected">
+         <font>
+            <Font size="14.0" />
+         </font></Button>
       <CheckBox layoutX="486.0" layoutY="106.0" mnemonicParsing="false" text="2" />
       <CheckBox layoutX="486.0" layoutY="89.0" mnemonicParsing="false" text="1" />
       <CheckBox layoutX="486.0" layoutY="140.0" mnemonicParsing="false" text="4" />
       <CheckBox layoutX="486.0" layoutY="123.0" mnemonicParsing="false" text="3" />
       <CheckBox layoutX="486.0" layoutY="157.0" mnemonicParsing="false" prefHeight="0.0" prefWidth="27.0" text="5" />
-      <Button layoutX="454.0" layoutY="233.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="92.0" text="pass" />
-      <Button layoutX="474.0" layoutY="368.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="92.0" text="Surrender" />
+      <Button fx:id="pass" layoutX="454.0" layoutY="233.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="92.0" onAction="#handleRollAction" text="pass">
+         <font>
+            <Font size="14.0" />
+         </font></Button>
+      <Button fx:id="surrender" layoutX="474.0" layoutY="368.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="92.0" onAction="#handleSurrenderAction" text="Surrender">
+         <font>
+            <Font size="14.0" />
+         </font></Button>
    </children>
 </Pane>
