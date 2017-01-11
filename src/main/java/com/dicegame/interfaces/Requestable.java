@@ -11,12 +11,12 @@ import java.util.List;
  */
 public interface Requestable {
 
-    List<Game> getAvailableGames();
+    List<Game> getGames();
     boolean login(String nick);
-    List<Integer> rollDice(Move move);
-    boolean joinGame(Game game);
+    List<Integer> makeMove(Move move);
+    boolean joinAsPlayer(Game game);
     boolean spectateGame(Game game);
-    boolean exitGame();
+    boolean quitGame();
     boolean createGame(Configuration config);
 
 

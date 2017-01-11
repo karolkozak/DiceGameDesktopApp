@@ -12,7 +12,7 @@ import java.util.List;
  */
 public class RequestController implements Requestable {
     @Override
-    public List<Game> getAvailableGames() {
+    public List<Game> getGames() {
         return null;
     }
 
@@ -22,12 +22,12 @@ public class RequestController implements Requestable {
     }
 
     @Override
-    public List<Integer> rollDice(Move move) {
+    public List<Integer> makeMove(Move move) {
         return null;
     }
 
     @Override
-    public boolean joinGame(Game game) {
+    public boolean joinAsPlayer(Game game) {
         return false;
     }
 
@@ -37,7 +37,7 @@ public class RequestController implements Requestable {
     }
 
     @Override
-    public boolean exitGame() {
+    public boolean quitGame() {
         return false;
     }
 
