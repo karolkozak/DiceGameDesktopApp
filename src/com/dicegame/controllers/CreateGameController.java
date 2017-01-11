@@ -1,6 +1,8 @@
 package com.dicegame.controllers;
 import com.dicegame.model.BotConfiguration;
 import com.dicegame.model.BotLevel;
+import com.dicegame.model.Configuration;
+import com.dicegame.model.GameType;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -11,11 +13,12 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.control.Alert.AlertType;
 import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.Optional;
 import java.util.ResourceBundle;
 
 /**
@@ -45,7 +48,6 @@ public class CreateGameController implements Initializable {
 
     private ObservableList<BotConfiguration> bots = FXCollections.observableArrayList();
 
-
     @FXML
     private TextField botName;
 
@@ -54,27 +56,92 @@ public class CreateGameController implements Initializable {
 
     @FXML
     public void handleCreateGameAction(ActionEvent actionEvent) {
-        String gameMode = modeComboBox.getValue();
-        Integer numOfPlayers = (Integer)numberOfPlayersSpinner.getValue();
+        Alert alert = new Alert(AlertType.INFORMATION);
+        alert.setHeaderText(null);
+        alert.setTitle("Create game exception!");
+
+        GameType gameType = GameType.get(modeComboBox.getValue());
+        System.out.println(gameType);
+        if(gameType == null) {
+            alert.setContentText("Game type cannot be null!");
+            alert.showAndWait();
+            return;
+        }
+        Integer numOfPlayers = 0;
+        Integer numberOfPointsToWin = 0;
+        try {
+            numOfPlayers = (Integer)numberOfPlayersSpinner.getValue();
+            if(numOfPlayers == 0) {
+                alert.setContentText("Number of players cannot be 0!");
+                alert.showAndWait();
+                return;
+            }
+            numOfPlayers -= bots.size();
+            if(numOfPlayers < 0) {
+                alert.setContentText("Number of players is less than number of bots!");
+                alert.showAndWait();
+                return;
+            } else if(numOfPlayers == 0) {
+                Alert alertConf = new Alert(AlertType.CONFIRMATION);
+                alertConf.setTitle("Number of players exception!");
+                alertConf.setHeaderText("Number of players equals number of bots. You will join only as observer.");
+                alertConf.setContentText("Are you ok with this?");
+                Optional<ButtonType> result = alertConf.showAndWait();
+                if (result.get() != ButtonType.OK){
+                    return;
+                }
+            }
+        } catch (Exception e) {
+            alert.setContentText("Number of players cannot be string!");
+            alert.showAndWait();
+            return;
+        }
+        try {
+            numberOfPointsToWin = Integer.parseInt(points.getText());
+        } catch (NumberFormatException e) {
+            alert.setContentText("Number of points cannot be string or empty!");
+            alert.showAndWait();
+            return;
+        }
+        Configuration configuration = new Configuration(numOfPlayers,
+                                                        gameType,
+                                                        numberOfPointsToWin,
+                                                        bots);
+        //TODO: send configuration to server
+
+
+        Parent createGame = null;
+        try {
+            createGame = FXMLLoader.load(getClass().getResource("../view/listOfGames.fxml"));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        Scene home_page = new Scene(createGame);
+        Stage app_stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
+        app_stage.setScene(home_page);
+        app_stage.show();
     }
 
     @FXML
     public void handleAddBotAction(ActionEvent actionEvent) {
-
+        Alert alert = new Alert(AlertType.INFORMATION);
+        alert.setTitle("Create bot exception!");
+        alert.setHeaderText(null);
         String name = botName.getText();
         if(!name.equals("") && isValid(name) && !isAlreadyUsed(name)) {
-
-            String level = botLevel.getValue();
-            BotLevel bLevel;
-
-            if (level == "Mistrz") bLevel = BotLevel.MASTER;
-            else bLevel = BotLevel.EASY;
+            BotLevel bLevel = BotLevel.get(botLevel.getValue());
+            if(bLevel == null) {
+                alert.setContentText("Bot level cannot be null!");
+                alert.showAndWait();
+                return;
+            }
             bots.add(new BotConfiguration(name, bLevel));
             botsTable.setItems(bots);
-            botName.setText("");
-        }else{
-            botName.setText("");
+        } else{
+            alert.setContentText("Name field is empty or given name already exists!");
+            alert.showAndWait();
         }
+        botName.setText("");
     }
 
     @FXML
@@ -102,7 +169,6 @@ public class CreateGameController implements Initializable {
         botNameColumn.setCellValueFactory(dataValue -> dataValue.getValue().getBotNameProperties());
         botLevelColumn.setCellValueFactory(dataValue -> dataValue.getValue().getBotLevelProperties());
 
-
         botsTable.setEditable(false);
         botsTable.setItems(bots);
     }
@@ -122,12 +188,11 @@ public class CreateGameController implements Initializable {
     }
 
     private boolean isAlreadyUsed(String name){
-        boolean nameAlreadyUsed = false;
         for (BotConfiguration bot : bots) {
             if (name.equals(bot.getName())) {
-                nameAlreadyUsed = true;
+                return true;
             }
         }
-        return nameAlreadyUsed;
+        return false;
     }
 }
