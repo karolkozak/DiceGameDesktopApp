@@ -15,8 +15,7 @@ import java.util.List;
  */
 public class RequestController implements Requestable {
 
-    static public JmsTemplate jmsTemplate;
-
+    public static JmsTemplate jmsTemplate;
 
     @Override
     public List<Game> getGames() {
@@ -33,8 +32,7 @@ public class RequestController implements Requestable {
         }).start();
 
         jmsTemplate.convertAndSend("login",nick);
-
-            return true;
+        return true;
     }
 
 
