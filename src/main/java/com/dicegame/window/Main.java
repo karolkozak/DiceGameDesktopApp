@@ -1,6 +1,7 @@
 package com.dicegame.window;
 
 import com.dicegame.configuration.ConfigTopic;
+import com.dicegame.controllers.RequestController;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -30,6 +31,8 @@ public class Main extends Application {
         ConfigurableApplicationContext context = SpringApplication.run(Main.class, args);
 
         JmsTemplate jmsTemplate = context.getBean(JmsTemplate.class);
+
+        RequestController.jmsTemplate=jmsTemplate;
 
         launch(args);
 

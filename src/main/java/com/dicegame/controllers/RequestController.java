@@ -4,6 +4,9 @@ import com.dicegame.interfaces.Requestable;
 import com.dicegame.model.Configuration;
 import com.dicegame.model.Game;
 import com.dicegame.model.Move;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ConfigurableApplicationContext;
+import org.springframework.jms.core.JmsTemplate;
 
 import java.util.List;
 
@@ -11,6 +14,10 @@ import java.util.List;
  * Created by Jakub on 2016-12-18.
  */
 public class RequestController implements Requestable {
+
+    static public JmsTemplate jmsTemplate;
+
+
     @Override
     public List<Game> getGames() {
         return null;
@@ -18,8 +25,18 @@ public class RequestController implements Requestable {
 
     @Override
     public boolean login(String nick) {
-        return false;
+
+        new Thread(new Runnable(){
+            public void run() {
+                System.out.println(jmsTemplate.receiveAndConvert("login"));
+            }
+        }).start();
+
+        jmsTemplate.convertAndSend("login",nick);
+
+            return true;
     }
+
 
     @Override
     public List<Integer> makeMove(Move move) {
