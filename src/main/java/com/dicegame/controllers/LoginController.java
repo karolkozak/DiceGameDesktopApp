@@ -35,30 +35,20 @@ public class LoginController implements Initializable {
         String nick = nickField.getText();
         if(isValid(nick)) {
 
-            try {
-                serverCommunicator = new RequestController();
-                serverCommunicator.login(nick);
-
+            serverCommunicator = new RequestController();
+            if(serverCommunicator.login(nick)) {
                 //create Account
                 Account userAccount = Account.getInstance();
                 userAccount.setNick(nick);
 
+
+                Parent createGame = FXMLLoader.load(getClass().getResource("../view/listOfGames.fxml"));
+                Scene home_page = new Scene(createGame);
+                Stage app_stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
+                app_stage.setScene(home_page);
+                app_stage.show();
+
             }
-            catch (Exception e){
-                System.out.println(e);
-            }
-
-            // SAMPLE GSON USAGE !!!
-            String url = "someHash";
-            LoginContainer loginContainer = new LoginContainer(nick, url);
-            String toSend = new Gson().toJson(loginContainer);
-
-
-            Parent createGame = FXMLLoader.load(getClass().getResource("../view/listOfGames.fxml"));
-            Scene home_page = new Scene(createGame);
-            Stage app_stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
-            app_stage.setScene(home_page);
-            app_stage.show();
 
         }else{
             nickField.setText("");

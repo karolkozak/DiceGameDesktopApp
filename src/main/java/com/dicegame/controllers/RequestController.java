@@ -4,6 +4,8 @@ import com.dicegame.interfaces.Requestable;
 import com.dicegame.model.Configuration;
 import com.dicegame.model.Game;
 import com.dicegame.model.Move;
+import com.dicegame.model.containers.LoginContainer;
+import com.google.gson.Gson;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.jms.core.JmsTemplate;
@@ -25,13 +27,18 @@ public class RequestController implements Requestable {
     @Override
     public boolean login(String nick) {
 
+        String url = "someHash";
+        LoginContainer loginContainer = new LoginContainer(nick, url);
+        String toSend = new Gson().toJson(loginContainer);
+
         new Thread(new Runnable(){
             public void run() {
-                System.out.println(jmsTemplate.receiveAndConvert("login"));
+                System.out.println(jmsTemplate.receiveAndConvert("login"));// login + hash
             }
         }).start();
 
-        jmsTemplate.convertAndSend("login",nick);
+        jmsTemplate.convertAndSend("login",toSend);
+
         return true;
     }
 
