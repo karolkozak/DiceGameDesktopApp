@@ -77,8 +77,7 @@ public class RequestController implements Requestable {
 
         return true;
     }
-
-
+    
     @Override
     public List<Integer> makeMove(Move move) {
         return null;
@@ -131,8 +130,12 @@ public class RequestController implements Requestable {
     }
 
     @Override
-    public boolean quitGame() {
-        return false;
+    public boolean quitGame(int gameID) {
+        JoinContainer joinContainer = new JoinContainer(Account.getInstance().getNick(), gameID);
+        String toSend = new Gson().toJson(joinContainer);
+        jmsTemplate.convertAndSend("quitGame",toSend);
+
+        return true;
     }
 
     @Override
