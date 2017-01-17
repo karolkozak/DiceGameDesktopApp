@@ -37,20 +37,21 @@ public class ListOfGamesController implements Initializable {
     private Button update;
 
     @FXML
-    private TableView listOfGames;
+    private TableView<Game> listOfGames;
 
     @FXML
-    private TableColumn<ListOfGamesTable, GameType> gameTypeColumn;
+    private TableColumn<Game, GameType> gameTypeColumn;
 
     @FXML
-    private TableColumn<ListOfGamesTable, String> leftPlacesColumn;
+    private TableColumn<Game, String> leftPlacesColumn;
 
     @FXML
-    private TableColumn<ListOfGamesTable, ObservableList> listOfPlayersColumn;
+    private TableColumn<Game, ObservableList> listOfPlayersColumn;
 
-    private ObservableList<ListOfGamesTable> games = FXCollections.observableArrayList();
+    private ObservableList<Game> games = FXCollections.observableArrayList();
 
     private Requestable serverCommunicator;
+
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -69,47 +70,46 @@ public class ListOfGamesController implements Initializable {
     public void handleUpdateAction(ActionEvent actionEvent) {
         //TODO: fetch data from server and show in table
 
-        serverCommunicator = new RequestController();
-        List<Game> fetchedFromServer = serverCommunicator.getGames();
-
-        //remove previous rows
         listOfGames.getItems().removeAll(listOfGames.getItems());
 
-        //add games getched from server to table
-        fetchedFromServer.forEach(game -> {
-            GameType gameType = game.getGameType();
-            Integer leftPlaces = game.getPlacesLeft();
-            List<Player> listOfPlayers = game.getGameState().getListOfPlayers();
-            games.add(new ListOfGamesTable(gameType, leftPlaces, listOfPlayers));
-        });
-        listOfGames.setItems(games);
+        serverCommunicator = new RequestController();
+        for (Game g :serverCommunicator.getGames()){
+            games.add(g);
+        }
 
+        listOfGames.setItems(games);
     }
 
     @FXML
     public void handleJoinAction(ActionEvent actionEvent) throws IOException {
         if(listOfGames.getSelectionModel().getSelectedItem()!= null) {
 
-            System.out.println(listOfGames.getSelectionModel().getSelectedItem().toString());
-            //TODO: set the way of game: player/observer and pass to inGame.fxml in order to disable some things
+            serverCommunicator = new RequestController();
+            if(serverCommunicator.joinAsPlayer(listOfGames.getSelectionModel().getSelectedItem())) {
 
-            Parent createGame = FXMLLoader.load(getClass().getResource("../view/inGame.fxml"));
-            Scene home_page = new Scene(createGame);
-            Stage app_stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
-            app_stage.setScene(home_page);
-            app_stage.show();
+                Parent createGame = FXMLLoader.load(getClass().getResource("../view/inGame.fxml"));
+                Scene home_page = new Scene(createGame);
+                Stage app_stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
+                app_stage.setScene(home_page);
+                app_stage.show();
+            }
         }
     }
 
     @FXML
     public void handleWatchAction(ActionEvent actionEvent) throws IOException {
-        //TODO: set the way of game: player/observer and pass to inGame.fxml in order to disable some things
+        if(listOfGames.getSelectionModel().getSelectedItem()!= null) {
 
-        Parent createGame = FXMLLoader.load(getClass().getResource("../view/inGame.fxml"));
-        Scene home_page = new Scene(createGame);
-        Stage app_stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
-        app_stage.setScene(home_page);
-        app_stage.show();
+            serverCommunicator = new RequestController();
+            if(serverCommunicator.spectateGame(listOfGames.getSelectionModel().getSelectedItem())) {
+
+                Parent createGame = FXMLLoader.load(getClass().getResource("../view/inGame.fxml"));
+                Scene home_page = new Scene(createGame);
+                Stage app_stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
+                app_stage.setScene(home_page);
+                app_stage.show();
+            }
+        }
     }
 
     @FXML

@@ -1,5 +1,11 @@
 package com.dicegame.model;
 
+import javafx.beans.property.SimpleListProperty;
+import javafx.beans.property.SimpleObjectProperty;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+
 /**
  * Created by Karol on 13/12/2016.
  */
@@ -31,5 +37,25 @@ public class Game {
 
     public GameState getGameState() {
         return gameState;
+    }
+
+    public SimpleObjectProperty getGameTypeProperties() {
+        return new SimpleObjectProperty<GameType>(gameType);
+    }
+
+    public SimpleStringProperty getLeftPlacesProperties() {
+        return new SimpleStringProperty(String.valueOf(placesLeft));
+    }
+
+    public SimpleListProperty getListOfPlayersProperties() {
+        ObservableList players = FXCollections.observableArrayList();
+        for(Player p : gameState.getListOfPlayers()){
+            players.add(p);
+        }
+        return new SimpleListProperty(players);
+    }
+
+    public int getGameID() {
+        return gameID;
     }
 }

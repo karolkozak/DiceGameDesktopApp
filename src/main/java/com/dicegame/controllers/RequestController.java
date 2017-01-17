@@ -2,6 +2,7 @@ package com.dicegame.controllers;
 
 import com.dicegame.interfaces.Requestable;
 import com.dicegame.model.*;
+import com.dicegame.model.containers.JoinContainer;
 import com.dicegame.model.containers.LoginContainer;
 import com.google.gson.Gson;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -84,12 +85,48 @@ public class RequestController implements Requestable {
 
     @Override
     public boolean joinAsPlayer(Game game) {
-        return false;
+
+        JoinContainer joinContainer = new JoinContainer(Account.getInstance().getNick(), game.getGameID());
+        String toSend = new Gson().toJson(joinContainer);
+
+        Thread waitOnQueue = new Thread(new Runnable(){
+            public void run() {
+                System.out.println(jmsTemplate.receiveAndConvert("joinAsPlayer"));// login + hash
+            }
+        });
+
+        waitOnQueue.start();
+        jmsTemplate.convertAndSend("joinAsPlayer",toSend);
+
+        try {
+            waitOnQueue.join();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        return true;
     }
 
     @Override
     public boolean spectateGame(Game game) {
-        return false;
+
+        JoinContainer joinContainer = new JoinContainer(Account.getInstance().getNick(), game.getGameID());
+        String toSend = new Gson().toJson(joinContainer);
+
+        Thread waitOnQueue = new Thread(new Runnable(){
+            public void run() {
+                System.out.println(jmsTemplate.receiveAndConvert("spectateGame"));// +nick
+            }
+        });
+
+        waitOnQueue.start();
+        jmsTemplate.convertAndSend("spectateGame",toSend);
+
+        try {
+            waitOnQueue.join();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        return true;
     }
 
     @Override
