@@ -1,15 +1,14 @@
 package com.dicegame.controllers;
 
 import com.dicegame.interfaces.Requestable;
-import com.dicegame.model.Configuration;
-import com.dicegame.model.Game;
-import com.dicegame.model.Move;
+import com.dicegame.model.*;
 import com.dicegame.model.containers.LoginContainer;
 import com.google.gson.Gson;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.jms.core.JmsTemplate;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -21,7 +20,35 @@ public class RequestController implements Requestable {
 
     @Override
     public List<Game> getGames() {
-        return null;
+
+        String nick = Account.getInstance().getNick();
+
+        Thread waitOnQueue = new Thread(new Runnable(){
+            public void run() {
+                System.out.println(jmsTemplate.receiveAndConvert("getGames"));// getGames/nick
+            }
+        });
+
+        waitOnQueue.start();
+        jmsTemplate.convertAndSend("getGames",nick);
+        try {
+            waitOnQueue.join();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        int gameID =124;
+        GameType gType = GameType.N_PLUS;
+        Integer lPlaces = 10;
+        List<Player> lPlayers = new ArrayList<Player>();
+        lPlayers.add(new Player(nick));
+        GameState gameState = new GameState(lPlayers,null,null,0,0);
+        Game game = new Game(gameID,gType,lPlaces,gameState);
+
+        List<Game> receivedGames = new ArrayList<>();
+        receivedGames.add(game);
+
+        return receivedGames;
     }
 
     @Override
@@ -31,13 +58,20 @@ public class RequestController implements Requestable {
         LoginContainer loginContainer = new LoginContainer(nick, url);
         String toSend = new Gson().toJson(loginContainer);
 
-        new Thread(new Runnable(){
+        Thread waitOnQueue = new Thread(new Runnable(){
             public void run() {
                 System.out.println(jmsTemplate.receiveAndConvert("login"));// login + hash
             }
-        }).start();
+        });
 
+        waitOnQueue.start();
         jmsTemplate.convertAndSend("login",toSend);
+
+        try {
+            waitOnQueue.join();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
 
         return true;
     }

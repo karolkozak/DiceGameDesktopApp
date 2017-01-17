@@ -1,5 +1,6 @@
 package com.dicegame.controllers;
 
+import com.dicegame.interfaces.Requestable;
 import com.dicegame.model.Game;
 import com.dicegame.model.GameType;
 import com.dicegame.model.ListOfGamesTable;
@@ -49,6 +50,8 @@ public class ListOfGamesController implements Initializable {
 
     private ObservableList<ListOfGamesTable> games = FXCollections.observableArrayList();
 
+    private Requestable serverCommunicator;
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         gameTypeColumn.setCellValueFactory(dataValue -> dataValue.getValue().getGameTypeProperties());
@@ -65,7 +68,9 @@ public class ListOfGamesController implements Initializable {
     @FXML
     public void handleUpdateAction(ActionEvent actionEvent) {
         //TODO: fetch data from server and show in table
-        List<Game> fetchedFromServer = new ArrayList<>();
+
+        serverCommunicator = new RequestController();
+        List<Game> fetchedFromServer = serverCommunicator.getGames();
 
         //remove previous rows
         listOfGames.getItems().removeAll(listOfGames.getItems());
@@ -79,27 +84,21 @@ public class ListOfGamesController implements Initializable {
         });
         listOfGames.setItems(games);
 
-        //add sample row
-        GameType gType = GameType.N_PLUS;
-        Integer lPlaces = 10;
-        List<Player> lPlayers = new ArrayList<Player>();
-        lPlayers.add(new Player("Bolek"));
-        games.add(new ListOfGamesTable(gType, lPlaces, lPlayers));
-        listOfGames.setItems(games);
     }
 
     @FXML
     public void handleJoinAction(ActionEvent actionEvent) throws IOException {
-        listOfGames.getSelectionModel().getSelectedItem();
+        if(listOfGames.getSelectionModel().getSelectedItem()!= null) {
 
-        System.out.println(listOfGames.getSelectionModel().getSelectedItem().toString());
-        //TODO: set the way of game: player/observer and pass to inGame.fxml in order to disable some things
+            System.out.println(listOfGames.getSelectionModel().getSelectedItem().toString());
+            //TODO: set the way of game: player/observer and pass to inGame.fxml in order to disable some things
 
-        Parent createGame = FXMLLoader.load(getClass().getResource("../view/inGame.fxml"));
-        Scene home_page = new Scene(createGame);
-        Stage app_stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
-        app_stage.setScene(home_page);
-        app_stage.show();
+            Parent createGame = FXMLLoader.load(getClass().getResource("../view/inGame.fxml"));
+            Scene home_page = new Scene(createGame);
+            Stage app_stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
+            app_stage.setScene(home_page);
+            app_stage.show();
+        }
     }
 
     @FXML

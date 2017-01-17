@@ -10,9 +10,11 @@ public class Game {
     private int placesLeft;
     private GameState gameState;
 
-    public Game(GameType gameType, int placesLeft) {
+    public Game(int gameID, GameType gameType, int placesLeft, GameState gameState) {
+        this.gameID = gameID;
         this.gameType = gameType;
         this.placesLeft = placesLeft;
+        this.gameState = gameState;
     }
 
     public void setGameState(GameState gameState) {
