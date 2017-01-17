@@ -2,6 +2,7 @@ package com.dicegame.controllers;
 
 import com.dicegame.interfaces.Requestable;
 import com.dicegame.model.*;
+import com.dicegame.model.containers.CreateGameContainer;
 import com.dicegame.model.containers.JoinContainer;
 import com.dicegame.model.containers.LoginContainer;
 import com.google.gson.Gson;
@@ -84,9 +85,9 @@ public class RequestController implements Requestable {
     }
 
     @Override
-    public boolean joinAsPlayer(Game game) {
+    public boolean joinAsPlayer(int gameID) {
 
-        JoinContainer joinContainer = new JoinContainer(Account.getInstance().getNick(), game.getGameID());
+        JoinContainer joinContainer = new JoinContainer(Account.getInstance().getNick(), gameID);
         String toSend = new Gson().toJson(joinContainer);
 
         Thread waitOnQueue = new Thread(new Runnable(){
@@ -107,9 +108,9 @@ public class RequestController implements Requestable {
     }
 
     @Override
-    public boolean spectateGame(Game game) {
+    public boolean spectateGame(int gameID) {
 
-        JoinContainer joinContainer = new JoinContainer(Account.getInstance().getNick(), game.getGameID());
+        JoinContainer joinContainer = new JoinContainer(Account.getInstance().getNick(), gameID);
         String toSend = new Gson().toJson(joinContainer);
 
         Thread waitOnQueue = new Thread(new Runnable(){
@@ -136,8 +137,31 @@ public class RequestController implements Requestable {
 
     @Override
     public boolean createGame(Configuration config) {
-        return false;
-    }//JMS SHIT
+
+        CreateGameContainer createContainer = new CreateGameContainer(Account.getInstance().getNick(), config);
+        String toSend = new Gson().toJson(createContainer);
+
+
+        Thread waitOnQueue = new Thread(new Runnable(){
+            public void run() {
+                int gameID = Integer.parseInt(jmsTemplate.receiveAndConvert("createGame").toString());// +nick
+                System.out.println(gameID);
+                joinAsPlayer(gameID);
+            }
+        });
+
+        waitOnQueue.start();
+        //jmsTemplate.convertAndSend("createGame",toSend);
+        jmsTemplate.convertAndSend("createGame","112");
+
+        try {
+            waitOnQueue.join();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        return true;
+    }
 
 
 }

@@ -14,8 +14,8 @@ public interface Requestable {
     List<Game> getGames();
     boolean login(String nick);
     List<Integer> makeMove(Move move);
-    boolean joinAsPlayer(Game game);
-    boolean spectateGame(Game game);
+    boolean joinAsPlayer(int gameID);
+    boolean spectateGame(int gameID);
     boolean quitGame();
     boolean createGame(Configuration config);
 

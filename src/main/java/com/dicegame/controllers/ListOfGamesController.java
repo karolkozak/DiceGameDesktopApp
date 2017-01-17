@@ -84,7 +84,7 @@ public class ListOfGamesController implements Initializable {
         if(listOfGames.getSelectionModel().getSelectedItem()!= null) {
 
             serverCommunicator = new RequestController();
-            if(serverCommunicator.joinAsPlayer(listOfGames.getSelectionModel().getSelectedItem())) {
+            if(serverCommunicator.joinAsPlayer(listOfGames.getSelectionModel().getSelectedItem().getGameID())){
 
                 Parent createGame = FXMLLoader.load(getClass().getResource("../view/inGame.fxml"));
                 Scene home_page = new Scene(createGame);
@@ -100,7 +100,7 @@ public class ListOfGamesController implements Initializable {
         if(listOfGames.getSelectionModel().getSelectedItem()!= null) {
 
             serverCommunicator = new RequestController();
-            if(serverCommunicator.spectateGame(listOfGames.getSelectionModel().getSelectedItem())) {
+            if(serverCommunicator.spectateGame(listOfGames.getSelectionModel().getSelectedItem().getGameID())){
 
                 Parent createGame = FXMLLoader.load(getClass().getResource("../view/inGame.fxml"));
                 Scene home_page = new Scene(createGame);

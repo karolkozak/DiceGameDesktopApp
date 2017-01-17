@@ -1,4 +1,5 @@
 package com.dicegame.controllers;
+import com.dicegame.interfaces.Requestable;
 import com.dicegame.model.BotConfiguration;
 import com.dicegame.model.BotLevel;
 import com.dicegame.model.Configuration;
@@ -54,6 +55,8 @@ public class CreateGameController implements Initializable {
     @FXML
     private TextField points;
 
+    Requestable serverCommunicator;
+
     @FXML
     public void handleCreateGameAction(ActionEvent actionEvent) {
         Alert alert = new Alert(AlertType.INFORMATION);
@@ -61,7 +64,7 @@ public class CreateGameController implements Initializable {
         alert.setTitle("Create game exception!");
 
         GameType gameType = GameType.get(modeComboBox.getValue());
-        System.out.println(gameType);
+        //System.out.println(gameType);
         if(gameType == null) {
             alert.setContentText("Game type cannot be null!");
             alert.showAndWait();
@@ -107,19 +110,21 @@ public class CreateGameController implements Initializable {
                                                         gameType,
                                                         numberOfPointsToWin,
                                                         bots);
-        //TODO: send configuration to server
 
+        serverCommunicator = new RequestController();
+        if(serverCommunicator.createGame(configuration)) {
 
-        Parent createGame = null;
-        try {
-            createGame = FXMLLoader.load(getClass().getResource("../view/listOfGames.fxml"));
-        } catch (IOException e) {
-            e.printStackTrace();
+            Parent createGame = null;
+            try {
+                createGame = FXMLLoader.load(getClass().getResource("../view/inGame.fxml"));
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            Scene home_page = new Scene(createGame);
+            Stage app_stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
+            app_stage.setScene(home_page);
+            app_stage.show();
         }
-        Scene home_page = new Scene(createGame);
-        Stage app_stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
-        app_stage.setScene(home_page);
-        app_stage.show();
     }
 
     @FXML
@@ -159,7 +164,8 @@ public class CreateGameController implements Initializable {
 
         numberOfPlayersSpinner.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(
                 0, 10000, 0));
-        numberOfPlayersSpinner.setEditable(true);
+        
+        numberOfPlayersSpinner.setEditable(false);
 
         botLevelItems.add("Latwy");
         botLevelItems.add("Mistrz");
