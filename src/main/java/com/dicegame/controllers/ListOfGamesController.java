@@ -3,7 +3,6 @@ package com.dicegame.controllers;
 import com.dicegame.interfaces.Requestable;
 import com.dicegame.model.Game;
 import com.dicegame.model.GameType;
-import com.dicegame.model.ListOfGamesTable;
 import com.dicegame.model.Player;
 import javafx.beans.property.SimpleListProperty;
 import javafx.beans.property.SimpleObjectProperty;
