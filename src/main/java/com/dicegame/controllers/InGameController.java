@@ -13,6 +13,7 @@ import javafx.scene.control.TableView;
 
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -22,18 +23,18 @@ import java.util.ResourceBundle;
 public class InGameController implements Initializable {
 
     @FXML
-    private TableView resultsTable;
+    private TableView<Player> resultsTable;
 
     @FXML
-    private TableColumn<InGameTable, String> playerColumn;
+    private TableColumn<Player, String> playerColumn;
 
     @FXML
-    private TableColumn<InGameTable, ObservableList> diceColumn;
+    private TableColumn<Player, String> diceColumn;
 
     @FXML
-    private TableColumn<InGameTable, String> pointsColumn;
+    private TableColumn<Player, String> pointsColumn;
 
-    private ObservableList<InGameTable> gameResults = FXCollections.observableArrayList();
+    private ObservableList<Player> gameState = FXCollections.observableArrayList();
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -42,7 +43,9 @@ public class InGameController implements Initializable {
         pointsColumn.setCellValueFactory(dataValue -> dataValue.getValue().getPointsProperties());
 
         resultsTable.setEditable(false);
-        resultsTable.setItems(gameResults);
+        resultsTable.setItems(gameState);
+
+        gameplay();
     }
 
     public void handleSurrenderAction(ActionEvent actionEvent) {
@@ -52,7 +55,10 @@ public class InGameController implements Initializable {
     public void handleRollAction(ActionEvent actionEvent) {
 
     }
-
+    
+    public void gameplay(){
+        //while not finished update;
+    }
     /**
      * this method is called after receive gameState (call update method by server)
      */
@@ -62,8 +68,8 @@ public class InGameController implements Initializable {
         //remove previous state
         resultsTable.getItems().removeAll(resultsTable.getItems());
         players.forEach(player -> {
-            gameResults.add(new InGameTable(player));
+            this.gameState.add(player);
         });
-        resultsTable.setItems(gameResults);
+        resultsTable.setItems(this.gameState);
     }
 }

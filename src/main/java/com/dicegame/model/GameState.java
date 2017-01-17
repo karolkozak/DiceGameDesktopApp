@@ -24,4 +24,5 @@ public class GameState {
     public List<Player> getListOfPlayers() {
         return listOfPlayers;
     }
+
 }

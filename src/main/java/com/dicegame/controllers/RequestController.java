@@ -77,7 +77,7 @@ public class RequestController implements Requestable {
 
         return true;
     }
-    
+
     @Override
     public List<Integer> makeMove(Move move) {
         return null;
@@ -164,6 +164,11 @@ public class RequestController implements Requestable {
         }
 
         return true;
+    }
+
+    @Override
+    public void updateGame(GameState gameState) {
+
     }
 
 
