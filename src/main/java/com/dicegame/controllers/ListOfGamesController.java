@@ -45,7 +45,7 @@ public class ListOfGamesController implements Initializable {
     private TableColumn<Game, String> leftPlacesColumn;
 
     @FXML
-    private TableColumn<Game, ObservableList> listOfPlayersColumn;
+    private TableColumn<Game, String> listOfPlayersColumn;
 
     private ObservableList<Game> games = FXCollections.observableArrayList();
 

@@ -29,12 +29,13 @@ public class RequestController implements Requestable {
         String toSend = new Gson().toJson(nick);
 
 
-        ///mock
+        ///mock wysylam sobie jakas gre
         int gameID =124;
         GameType gType = GameType.N_PLUS;
         Integer lPlaces = 10;
         List<Player> lPlayers = new ArrayList<Player>();
         lPlayers.add(new Player(nick));
+        lPlayers.add(new Player("yoloGamble"));
         GameState gameState = new GameState(lPlayers,null,null,0,0);
         Game game = new Game(gameID,gType,lPlaces,gameState);
 
@@ -223,10 +224,7 @@ public class RequestController implements Requestable {
     @Override
     public void updateGame(GameState gameState) {
 
-
-
     }
-
 
 
 }

@@ -1,7 +1,6 @@
 package com.dicegame.controllers;
 
 import com.dicegame.model.GameState;
-import com.dicegame.model.InGameTable;
 import com.dicegame.model.Player;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;

@@ -47,12 +47,8 @@ public class Game {
         return new SimpleStringProperty(String.valueOf(placesLeft));
     }
 
-    public SimpleListProperty getListOfPlayersProperties() {
-        ObservableList players = FXCollections.observableArrayList();
-        for(Player p : gameState.getListOfPlayers()){
-            players.add(p);
-        }
-        return new SimpleListProperty(players);
+    public SimpleStringProperty getListOfPlayersProperties() {
+        return new SimpleStringProperty(gameState.getListOfPlayers().toString());
     }
 
     public int getGameID() {
