@@ -133,6 +133,8 @@ public class InGameController implements Initializable {
 
         System.out.println(this.gameState.getStatus().toString());
 
+        System.out.println("FINITO");
+
     }
 
     /**
