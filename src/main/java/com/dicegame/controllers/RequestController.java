@@ -30,26 +30,10 @@ public class RequestController implements Requestable {
         String nick = Account.getInstance().getNick();
         String toSend = new Gson().toJson(nick);
 
-
-        ///mock wysylam sobie jakas gre
-        int gameID =124;
-        GameType gType = GameType.N_PLUS;
-        Integer lPlaces = 10;
-        List<Player> lPlayers = new ArrayList<Player>();
-        lPlayers.add(new Player(nick));
-        lPlayers.add(new Player("yoloGamble"));
-        GameState gameState = new GameState(lPlayers,null,null,0,0);
-        Game game = new Game(gameID,gType,lPlaces,gameState);
-
-        List<Game> toSendArray = new ArrayList<>();
-        toSendArray.add(game);
-        toSend = new Gson().toJson(toSendArray);
-        //
-
         ExecutorService es = Executors.newSingleThreadExecutor();
         Future<List<Game>> waitOnQueue = es.submit(new Callable<List<Game>>() {
             public List<Game> call() throws Exception {
-                String received = jmsTemplate.receiveAndConvert("getGames").toString();// <- getGames/nick
+                String received = jmsTemplate.receiveAndConvert("getGames/".concat(nick)).toString();
                 List<Game> response = new Gson().fromJson(received,new TypeToken<List<Game>>(){}.getType());
                 System.out.println(response);
                 return response;
@@ -79,12 +63,11 @@ public class RequestController implements Requestable {
         LoginContainer loginContainer = new LoginContainer(nick, url);
         String toSend = new Gson().toJson(loginContainer); // <-
         System.out.println(toSend);
-        toSend = new Gson().toJson(new Boolean(true));
 
         ExecutorService es = Executors.newSingleThreadExecutor();
         Future<Boolean> waitOnQueue = es.submit(new Callable<Boolean>() {
             public Boolean call() throws Exception {
-                String received = jmsTemplate.receiveAndConvert("login").toString();// <- login + hash
+                String received = jmsTemplate.receiveAndConvert("login/".concat(url)).toString();// <- login + hash
                 boolean response = new Gson().fromJson(received,Boolean.class);
                 System.out.println(response);
                 return response;
@@ -112,12 +95,11 @@ public class RequestController implements Requestable {
         MakeMoveContainer makeMoveContainer = new MakeMoveContainer(Account.getInstance().getNick(), move);
         String toSend = new Gson().toJson(makeMoveContainer);
         System.out.println(toSend);
-        toSend = new Gson().toJson(new Boolean(true));
 
         ExecutorService es = Executors.newSingleThreadExecutor();
         Future<Boolean> waitOnQueue = es.submit(new Callable<Boolean>() {
             public Boolean call() throws Exception {
-                String received = jmsTemplate.receiveAndConvert("makeMove").toString();// <-  + nick
+                String received = jmsTemplate.receiveAndConvert("makeMove/".concat(Account.getInstance().getNick())).toString();
                 boolean response = new Gson().fromJson(received,Boolean.class);
                 System.out.println(response);
                 return response;
@@ -146,12 +128,11 @@ public class RequestController implements Requestable {
         JoinContainer joinContainer = new JoinContainer(Account.getInstance().getNick(), gameID);
         String toSend = new Gson().toJson(joinContainer);
         System.out.println(toSend);
-        toSend = new Gson().toJson(new Boolean(true));
 
         ExecutorService es = Executors.newSingleThreadExecutor();
         Future<Boolean> waitOnQueue = es.submit(new Callable<Boolean>() {
             public Boolean call() throws Exception {
-                String received = jmsTemplate.receiveAndConvert("joinAsPlayer").toString();// <-  + nick
+                String received = jmsTemplate.receiveAndConvert("joinAsPlayer/".concat(Account.getInstance().getNick())).toString();
                 boolean response = new Gson().fromJson(received,Boolean.class);
                 System.out.println(response);
                 return response;
@@ -159,7 +140,6 @@ public class RequestController implements Requestable {
         });
 
         jmsTemplate.convertAndSend("joinAsPlayer",toSend);
-
         Boolean response= false;
 
         try {
@@ -178,14 +158,13 @@ public class RequestController implements Requestable {
     public boolean spectateGame(int gameID) {
 
         JoinContainer joinContainer = new JoinContainer(Account.getInstance().getNick(), gameID);
-        String toSend = new Gson().toJson(joinContainer); // <-
+        String toSend = new Gson().toJson(joinContainer);
         System.out.println(toSend);
-        toSend = new Gson().toJson(new Boolean(true));
 
         ExecutorService es = Executors.newSingleThreadExecutor();
         Future<Boolean> waitOnQueue = es.submit(new Callable<Boolean>() {
             public Boolean call() throws Exception {
-                String received = jmsTemplate.receiveAndConvert("spectateGame").toString();// <-  + nick
+                String received = jmsTemplate.receiveAndConvert("spectateGame/".concat(Account.getInstance().getNick())).toString();
                 boolean response = new Gson().fromJson(received,Boolean.class);
                 System.out.println(response);
                 return response;
@@ -223,12 +202,11 @@ public class RequestController implements Requestable {
         CreateGameContainer createContainer = new CreateGameContainer(Account.getInstance().getNick(), config);
         String toSend = new Gson().toJson(createContainer);
         System.out.println(toSend);
-        toSend = new Gson().toJson(new Boolean(true));// mock
 
         ExecutorService es = Executors.newSingleThreadExecutor();
         Future<Boolean> waitOnQueue = es.submit(new Callable<Boolean>() {
             public Boolean call() throws Exception {
-                String received = jmsTemplate.receiveAndConvert("createGame").toString();// <-  + nick
+                String received = jmsTemplate.receiveAndConvert("createGame/".concat(Account.getInstance().getNick())).toString();// <-  + nick
                 boolean response = new Gson().fromJson(received,Boolean.class);
                 System.out.println(response);
                 return response;
@@ -258,24 +236,13 @@ public class RequestController implements Requestable {
         ExecutorService es = Executors.newSingleThreadExecutor();
         Future<GameState> waitOnQueue = es.submit(new Callable<GameState>() {
             public GameState call() throws Exception {
-                String received = jmsTemplate.receiveAndConvert("updateGame").toString();// <-  + nick
+                String received = jmsTemplate.receiveAndConvert("updateGame/".concat(Account.getInstance().getNick())).toString();// <-  + nick
                 GameState response = new Gson().fromJson(received,GameState.class);
                 System.out.println(response);
                 return response;
             }
         });
 
-        //mocked server response
-        List<Player> playersList= new ArrayList<Player>();
-        playersList.add(new Player(Account.getInstance().getNick(),12,new ArrayList<Integer>(Arrays.asList(new Integer[]{1,4,3,2,5}))));
-        playersList.add(new Player("yoloGamble",12,new ArrayList<Integer>(Arrays.asList(new Integer[]{1,4,3,2,5}))));
-
-        GameState gameState = null;
-        if(mock==1)gameState = new GameState(playersList, GameStatus.STARTED,Account.getInstance().getNick(),0,0);
-        if(mock==2)gameState = new GameState(playersList, GameStatus.STOPPED,Account.getInstance().getNick(),0,0);
-        String toSend = new Gson().toJson(gameState);
-        jmsTemplate.convertAndSend("updateGame",toSend);
-        //
 
         GameState response = null;
 

@@ -1,17 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="8f3488a2-9288-4fc9-aafa-a84948312037" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/dicegame/controllers/RequestControllerMocked.java" />
+    <list default="true" id="8f3488a2-9288-4fc9-aafa-a84948312037" name="Default" comment="thread dla gameplay,&#10;mock Requesta">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/DiceGameDemo.iws" afterPath="$PROJECT_DIR$/DiceGameDemo.iws" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/dicegame/controllers/CreateGameController.java" afterPath="$PROJECT_DIR$/src/main/java/com/dicegame/controllers/CreateGameController.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/dicegame/controllers/InGameController.java" afterPath="$PROJECT_DIR$/src/main/java/com/dicegame/controllers/InGameController.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/dicegame/controllers/ListOfGamesController.java" afterPath="$PROJECT_DIR$/src/main/java/com/dicegame/controllers/ListOfGamesController.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/dicegame/controllers/LoginController.java" afterPath="$PROJECT_DIR$/src/main/java/com/dicegame/controllers/LoginController.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/dicegame/controllers/RequestController.java" afterPath="$PROJECT_DIR$/src/main/java/com/dicegame/controllers/RequestController.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/dicegame/interfaces/Requestable.java" afterPath="$PROJECT_DIR$/src/main/java/com/dicegame/interfaces/Requestable.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/dicegame/model/GameState.java" afterPath="$PROJECT_DIR$/src/main/java/com/dicegame/model/GameState.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/dicegame/window/Main.java" afterPath="$PROJECT_DIR$/src/main/java/com/dicegame/window/Main.java" />
     </list>
     <ignored path="$PROJECT_DIR$/.gradle/" />
     <ignored path="$PROJECT_DIR$/build/" />
@@ -100,15 +92,13 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="RequestController.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="RequestController.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/dicegame/controllers/RequestController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="437">
-              <caret line="279" column="34" lean-forward="true" selection-start-line="279" selection-start-column="34" selection-end-line="279" selection-end-column="34" />
+            <state relative-caret-position="788">
+              <caret line="244" column="0" lean-forward="true" selection-start-line="244" selection-start-column="0" selection-end-line="244" selection-end-column="0" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#1168#1176#0" expanded="true" />
-                <element signature="e#9269#9277#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -125,21 +115,6 @@
                 <element signature="e#2102#2103#0" expanded="true" />
                 <element signature="e#2751#2760#0" expanded="true" />
                 <element signature="e#3183#3192#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="RequestControllerMocked.java" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/dicegame/controllers/RequestControllerMocked.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-2901">
-              <caret line="95" column="32" lean-forward="true" selection-start-line="95" selection-start-column="32" selection-end-line="95" selection-end-column="32" />
-              <folding>
-                <element signature="imports" expanded="true" />
-                <element signature="e#1174#1182#0" expanded="true" />
-                <element signature="e#4839#4847#0" expanded="true" />
-                <element signature="e#9852#9860#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -577,13 +552,13 @@
         <option value="$PROJECT_DIR$/src/main/java/com/dicegame/model/Account.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/dicegame/model/GameState.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/dicegame/interfaces/Requestable.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/dicegame/controllers/RequestController.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/dicegame/window/Main.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/dicegame/controllers/LoginController.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/dicegame/controllers/ListOfGamesController.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/dicegame/controllers/CreateGameController.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/dicegame/controllers/RequestControllerMocked.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/dicegame/controllers/InGameController.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/dicegame/controllers/RequestController.java" />
       </list>
     </option>
   </component>
@@ -1338,7 +1313,14 @@
       <option name="project" value="LOCAL" />
       <updated>1484741268331</updated>
     </task>
-    <option name="localTasksCounter" value="15" />
+    <task id="LOCAL-00015" summary="thread dla gameplay,&#10;mock Requesta">
+      <created>1484745963325</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1484745963325</updated>
+    </task>
+    <option name="localTasksCounter" value="16" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -1390,7 +1372,8 @@
     <MESSAGE value="zmiana z threadow na executory bo one mogą coś zwracać" />
     <MESSAGE value="update" />
     <MESSAGE value="make move , pass, surrender" />
-    <option name="LAST_COMMIT_MESSAGE" value="make move , pass, surrender" />
+    <MESSAGE value="thread dla gameplay,&#10;mock Requesta" />
+    <option name="LAST_COMMIT_MESSAGE" value="thread dla gameplay,&#10;mock Requesta" />
     <option name="MAKE_NEW_CHANGELIST_ACTIVE" value="true" />
   </component>
   <component name="XDebuggerManager">
@@ -1780,14 +1763,15 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/dicegame/controllers/RequestController.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/dicegame/controllers/RequestControllerMocked.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="437">
-          <caret line="279" column="34" lean-forward="true" selection-start-line="279" selection-start-column="34" selection-end-line="279" selection-end-column="34" />
+        <state relative-caret-position="142">
+          <caret line="274" column="13" lean-forward="true" selection-start-line="274" selection-start-column="13" selection-end-line="274" selection-end-column="13" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#1168#1176#0" expanded="true" />
-            <element signature="e#9269#9277#0" expanded="true" />
+            <element signature="e#1174#1182#0" expanded="true" />
+            <element signature="e#4839#4847#0" expanded="true" />
+            <element signature="e#9852#9860#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -1806,15 +1790,12 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/dicegame/controllers/RequestControllerMocked.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/dicegame/controllers/RequestController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-2901">
-          <caret line="95" column="32" lean-forward="true" selection-start-line="95" selection-start-column="32" selection-end-line="95" selection-end-column="32" />
+        <state relative-caret-position="788">
+          <caret line="244" column="0" lean-forward="true" selection-start-line="244" selection-start-column="0" selection-end-line="244" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#1174#1182#0" expanded="true" />
-            <element signature="e#4839#4847#0" expanded="true" />
-            <element signature="e#9852#9860#0" expanded="true" />
           </folding>
         </state>
       </provider>
