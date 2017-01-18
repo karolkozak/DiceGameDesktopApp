@@ -19,6 +19,6 @@ public interface Requestable {
     boolean spectateGame(int gameID);
     boolean quitGame(int gameID);
     boolean createGame(Configuration config);
-    void updateGame(GameState gameState);
+    GameState updateGame();
 
 }

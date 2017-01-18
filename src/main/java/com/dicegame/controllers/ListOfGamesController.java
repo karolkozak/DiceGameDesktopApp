@@ -1,6 +1,7 @@
 package com.dicegame.controllers;
 
 import com.dicegame.interfaces.Requestable;
+import com.dicegame.model.Account;
 import com.dicegame.model.Game;
 import com.dicegame.model.GameType;
 import com.dicegame.model.Player;
@@ -84,7 +85,10 @@ public class ListOfGamesController implements Initializable {
         if(listOfGames.getSelectionModel().getSelectedItem()!= null) {
 
             serverCommunicator = new RequestController();
-            if(serverCommunicator.joinAsPlayer(listOfGames.getSelectionModel().getSelectedItem().getGameID())){
+            int gameID = listOfGames.getSelectionModel().getSelectedItem().getGameID();
+            if(serverCommunicator.joinAsPlayer(gameID)){
+
+                Account.getInstance().setGameID(gameID);
 
                 Parent createGame = FXMLLoader.load(getClass().getResource("../view/inGame.fxml"));
                 Scene home_page = new Scene(createGame);
@@ -100,8 +104,10 @@ public class ListOfGamesController implements Initializable {
         if(listOfGames.getSelectionModel().getSelectedItem()!= null) {
 
             serverCommunicator = new RequestController();
-            if(serverCommunicator.spectateGame(listOfGames.getSelectionModel().getSelectedItem().getGameID())){
+            int gameID = listOfGames.getSelectionModel().getSelectedItem().getGameID();
+            if(serverCommunicator.spectateGame(gameID)){
 
+                Account.getInstance().setGameID(gameID);
                 Parent createGame = FXMLLoader.load(getClass().getResource("../view/inGame.fxml"));
                 Scene home_page = new Scene(createGame);
                 Stage app_stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();

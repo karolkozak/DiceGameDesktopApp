@@ -5,6 +5,7 @@ import com.dicegame.model.*;
 import com.dicegame.model.containers.CreateGameContainer;
 import com.dicegame.model.containers.JoinContainer;
 import com.dicegame.model.containers.LoginContainer;
+import com.dicegame.model.containers.MakeMoveContainer;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -107,7 +108,35 @@ public class RequestController implements Requestable {
 
     @Override
     public boolean makeMove(Move move) {
-        return true;
+        MakeMoveContainer makeMoveContainer = new MakeMoveContainer(Account.getInstance().getNick(), move);
+        String toSend = new Gson().toJson(makeMoveContainer);
+        System.out.println(toSend);
+        toSend = new Gson().toJson(new Boolean(true));
+
+        ExecutorService es = Executors.newSingleThreadExecutor();
+        Future<Boolean> waitOnQueue = es.submit(new Callable<Boolean>() {
+            public Boolean call() throws Exception {
+                String received = jmsTemplate.receiveAndConvert("makeMove").toString();// <-  + nick
+                boolean response = new Gson().fromJson(received,Boolean.class);
+                System.out.println(response);
+                return response;
+            }
+        });
+
+        jmsTemplate.convertAndSend("makeMove",toSend);
+
+        Boolean response= false;
+
+        try {
+            response = waitOnQueue.get();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        }
+        es.shutdown();
+
+        return response;
     }
 
     @Override
@@ -222,7 +251,12 @@ public class RequestController implements Requestable {
     }
 
     @Override
-    public void updateGame(GameState gameState) {
+    public GameState updateGame() {
+
+        String received = jmsTemplate.receiveAndConvert("updateGame").toString();// <-  + nick
+        GameState response = new Gson().fromJson(received,GameState.class);
+        System.out.println(response);
+        return response;
 
     }
 
