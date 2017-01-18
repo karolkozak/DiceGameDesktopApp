@@ -27,7 +27,7 @@ public class LoginController implements Initializable {
 
     }
 
-    Requestable serverCommunicator;
+    Requestable serverCommunicator = new RequestControllerMocked();
 
     @FXML
     public void handleLoginAction(ActionEvent actionEvent) throws IOException {
@@ -35,7 +35,6 @@ public class LoginController implements Initializable {
         String nick = nickField.getText();
         if(isValid(nick)) {
 
-            serverCommunicator = new RequestController();
             if(serverCommunicator.login(nick)) {
                 //create Account
                 Account userAccount = Account.getInstance();

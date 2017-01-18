@@ -25,4 +25,19 @@ public class GameState {
         return listOfPlayers;
     }
 
+    public GameStatus getStatus() {
+        return status;
+    }
+
+    public String getActivePlayer() {
+        return activePlayer;
+    }
+
+    public int getWinningNumber() {
+        return winningNumber;
+    }
+
+    public int getNumberOfPointsToWin() {
+        return numberOfPointsToWin;
+    }
 }

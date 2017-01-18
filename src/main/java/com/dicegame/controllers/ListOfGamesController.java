@@ -50,7 +50,7 @@ public class ListOfGamesController implements Initializable {
 
     private ObservableList<Game> games = FXCollections.observableArrayList();
 
-    private Requestable serverCommunicator;
+    private Requestable serverCommunicator = new RequestControllerMocked();
 
 
     @Override
@@ -72,7 +72,6 @@ public class ListOfGamesController implements Initializable {
 
         listOfGames.getItems().removeAll(listOfGames.getItems());
 
-        serverCommunicator = new RequestController();
         for (Game g :serverCommunicator.getGames()){
             games.add(g);
         }
@@ -84,7 +83,6 @@ public class ListOfGamesController implements Initializable {
     public void handleJoinAction(ActionEvent actionEvent) throws IOException {
         if(listOfGames.getSelectionModel().getSelectedItem()!= null) {
 
-            serverCommunicator = new RequestController();
             int gameID = listOfGames.getSelectionModel().getSelectedItem().getGameID();
             if(serverCommunicator.joinAsPlayer(gameID)){
 
@@ -103,7 +101,6 @@ public class ListOfGamesController implements Initializable {
     public void handleWatchAction(ActionEvent actionEvent) throws IOException {
         if(listOfGames.getSelectionModel().getSelectedItem()!= null) {
 
-            serverCommunicator = new RequestController();
             int gameID = listOfGames.getSelectionModel().getSelectedItem().getGameID();
             if(serverCommunicator.spectateGame(gameID)){
 

@@ -55,7 +55,7 @@ public class CreateGameController implements Initializable {
     @FXML
     private TextField points;
 
-    Requestable serverCommunicator;
+    Requestable serverCommunicator = new RequestControllerMocked();
 
     @FXML
     public void handleCreateGameAction(ActionEvent actionEvent) {
@@ -111,7 +111,6 @@ public class CreateGameController implements Initializable {
                                                         numberOfPointsToWin,
                                                         bots);
 
-        serverCommunicator = new RequestController();
         if(serverCommunicator.createGame(configuration)) {
 
             Parent createGame = null;

@@ -20,7 +20,7 @@ import java.util.concurrent.*;
 /**
  * Created by Jakub on 2016-12-18.
  */
-public class RequestController implements Requestable {
+public class RequestControllerMocked implements Requestable {
 
     public static JmsTemplate jmsTemplate;
 
@@ -136,6 +136,16 @@ public class RequestController implements Requestable {
             e.printStackTrace();
         }
         es.shutdown();
+
+        //mock update
+        List<Player> playersList= new ArrayList<Player>();
+        playersList.add(new Player(Account.getInstance().getNick(),12,new ArrayList<Integer>(Arrays.asList(new Integer[]{1,4,3,2,5}))));
+        playersList.add(new Player("yoloGamble",12,new ArrayList<Integer>(Arrays.asList(new Integer[]{1,4,3,2,5}))));
+        GameState gameState =new GameState(playersList, GameStatus.STARTED, "yoloGamble", 0, 0);
+
+        toSend = new Gson().toJson(gameState);
+        jmsTemplate.convertAndSend("updateGame", toSend);
+        //
 
         return response;
     }
@@ -265,16 +275,19 @@ public class RequestController implements Requestable {
             }
         });
 
+        if(mock!=0) {
         //mocked server response
-        List<Player> playersList= new ArrayList<Player>();
-        playersList.add(new Player(Account.getInstance().getNick(),12,new ArrayList<Integer>(Arrays.asList(new Integer[]{1,4,3,2,5}))));
-        playersList.add(new Player("yoloGamble",12,new ArrayList<Integer>(Arrays.asList(new Integer[]{1,4,3,2,5}))));
-
-        GameState gameState = null;
-        if(mock==1)gameState = new GameState(playersList, GameStatus.STARTED,Account.getInstance().getNick(),0,0);
-        if(mock==2)gameState = new GameState(playersList, GameStatus.STOPPED,Account.getInstance().getNick(),0,0);
-        String toSend = new Gson().toJson(gameState);
-        jmsTemplate.convertAndSend("updateGame",toSend);
+            List<Player> playersList= new ArrayList<Player>();
+            playersList.add(new Player(Account.getInstance().getNick(),12,new ArrayList<Integer>(Arrays.asList(new Integer[]{1,4,3,2,5}))));
+            playersList.add(new Player("yoloGamble",12,new ArrayList<Integer>(Arrays.asList(new Integer[]{1,4,3,2,5}))));
+            GameState gameState = null;
+            if (mock == 1)
+                gameState = new GameState(playersList, GameStatus.STARTED, Account.getInstance().getNick(), 0, 0);
+            if (mock == 2)
+                gameState = new GameState(playersList, GameStatus.STOPPED, Account.getInstance().getNick(), 0, 0);
+            String toSend = new Gson().toJson(gameState);
+            jmsTemplate.convertAndSend("updateGame", toSend);
+        }
         //
 
         GameState response = null;

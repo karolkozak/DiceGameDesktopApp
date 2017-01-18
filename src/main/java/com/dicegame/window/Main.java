@@ -2,6 +2,7 @@ package com.dicegame.window;
 
 import com.dicegame.configuration.ConfigTopic;
 import com.dicegame.controllers.RequestController;
+import com.dicegame.controllers.RequestControllerMocked;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -35,6 +36,7 @@ public class Main extends Application {
         JmsTemplate jmsTemplate = context.getBean(JmsTemplate.class);
 
         RequestController.jmsTemplate=jmsTemplate;
+        RequestControllerMocked.jmsTemplate=jmsTemplate;
 
         launch(args);
 

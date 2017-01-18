@@ -1,10 +1,7 @@
 package com.dicegame.controllers;
 
 import com.dicegame.interfaces.Requestable;
-import com.dicegame.model.Account;
-import com.dicegame.model.GameState;
-import com.dicegame.model.Move;
-import com.dicegame.model.Player;
+import com.dicegame.model.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -55,7 +52,7 @@ public class InGameController implements Initializable {
     private Button surrender;
 
     private ObservableList<Player> playersInGame = FXCollections.observableArrayList();
-    private Requestable serverCommunicator;
+    private Requestable serverCommunicator = new RequestControllerMocked();
     private GameState gameState;
 
     @Override
@@ -67,11 +64,16 @@ public class InGameController implements Initializable {
         resultsTable.setEditable(false);
         resultsTable.setItems(playersInGame);
 
-        gameplay();
+        Thread t = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                gameplay();
+            }
+        });
+        t.start();
     }
 
     public void handleSurrenderAction(ActionEvent actionEvent) throws IOException {
-        serverCommunicator = new RequestController();
         serverCommunicator.quitGame(Account.getInstance().getGameID());
         Account.getInstance().setGameID(0);
 
@@ -91,19 +93,43 @@ public class InGameController implements Initializable {
         if(box5.isSelected()) move.add(5);
 
         if(!move.isEmpty()) {
-            serverCommunicator = new RequestController();
             serverCommunicator.makeMove(new Move(move));
         }
     }
 
     public void handlePassAction(ActionEvent actionEvent) {
         Set<Integer> move = new HashSet<Integer>();
-        serverCommunicator = new RequestController();
         serverCommunicator.makeMove(new Move(move));
     }
 
     public void gameplay(){
-        //while not finished update;
+
+        pass.setDisable(true);
+        roll.setDisable(true);
+        this.gameState = serverCommunicator.updateGame(1);
+        this.updateTable(this.gameState);
+
+        int mock = 0;
+        while(!this.gameState.getStatus().equals(GameStatus.STOPPED)){
+
+            System.out.println(this.gameState.getStatus().toString());
+
+            if(this.gameState.getStatus().equals(GameStatus.STARTED)){
+                if(this.gameState.getActivePlayer().equals(Account.getInstance().getNick())){
+                    pass.setDisable(false);
+                    roll.setDisable(false);
+                }
+            }
+            this.gameState = serverCommunicator.updateGame(mock);
+            this.updateTable(this.gameState);
+            pass.setDisable(true);
+            roll.setDisable(true);
+
+            mock=2;
+        }
+
+        System.out.println(this.gameState.getStatus().toString());
+
     }
 
     /**
