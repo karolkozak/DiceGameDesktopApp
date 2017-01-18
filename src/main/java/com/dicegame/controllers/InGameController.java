@@ -55,7 +55,7 @@ public class InGameController implements Initializable {
     public void handleRollAction(ActionEvent actionEvent) {
 
     }
-    
+
     public void gameplay(){
         //while not finished update;
     }

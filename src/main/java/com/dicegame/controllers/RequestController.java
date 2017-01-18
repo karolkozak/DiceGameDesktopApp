@@ -6,12 +6,14 @@ import com.dicegame.model.containers.CreateGameContainer;
 import com.dicegame.model.containers.JoinContainer;
 import com.dicegame.model.containers.LoginContainer;
 import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.jms.core.JmsTemplate;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.*;
 
 /**
  * Created by Jakub on 2016-12-18.
@@ -24,21 +26,10 @@ public class RequestController implements Requestable {
     public List<Game> getGames() {
 
         String nick = Account.getInstance().getNick();
+        String toSend = new Gson().toJson(nick);
 
-        Thread waitOnQueue = new Thread(new Runnable(){
-            public void run() {
-                System.out.println(jmsTemplate.receiveAndConvert("getGames"));// getGames/nick
-            }
-        });
 
-        waitOnQueue.start();
-        jmsTemplate.convertAndSend("getGames",nick);
-        try {
-            waitOnQueue.join();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-
+        ///mock
         int gameID =124;
         GameType gType = GameType.N_PLUS;
         Integer lPlaces = 10;
@@ -47,10 +38,35 @@ public class RequestController implements Requestable {
         GameState gameState = new GameState(lPlayers,null,null,0,0);
         Game game = new Game(gameID,gType,lPlaces,gameState);
 
-        List<Game> receivedGames = new ArrayList<>();
-        receivedGames.add(game);
+        List<Game> toSendArray = new ArrayList<>();
+        toSendArray.add(game);
+        toSend = new Gson().toJson(toSendArray);
+        //
 
-        return receivedGames;
+        ExecutorService es = Executors.newSingleThreadExecutor();
+        Future<List<Game>> waitOnQueue = es.submit(new Callable<List<Game>>() {
+            public List<Game> call() throws Exception {
+                String received = jmsTemplate.receiveAndConvert("getGames").toString();// <- getGames/nick
+                List<Game> response = new Gson().fromJson(received,new TypeToken<List<Game>>(){}.getType());
+                System.out.println(response);
+                return response;
+            }
+        });
+
+        System.out.println(toSend);
+        jmsTemplate.convertAndSend("getGames",toSend);
+
+        List<Game> response= new ArrayList<>();
+        try {
+            response = waitOnQueue.get();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        }
+        es.shutdown();
+
+        return response;
     }
 
     @Override
@@ -58,29 +74,39 @@ public class RequestController implements Requestable {
 
         String url = "someHash";
         LoginContainer loginContainer = new LoginContainer(nick, url);
-        String toSend = new Gson().toJson(loginContainer);
+        String toSend = new Gson().toJson(loginContainer); // <-
+        System.out.println(toSend);
+        toSend = new Gson().toJson(new Boolean(true));
 
-        Thread waitOnQueue = new Thread(new Runnable(){
-            public void run() {
-                System.out.println(jmsTemplate.receiveAndConvert("login"));// login + hash
+        ExecutorService es = Executors.newSingleThreadExecutor();
+        Future<Boolean> waitOnQueue = es.submit(new Callable<Boolean>() {
+            public Boolean call() throws Exception {
+                String received = jmsTemplate.receiveAndConvert("login").toString();// <- login + hash
+                boolean response = new Gson().fromJson(received,Boolean.class);
+                System.out.println(response);
+                return response;
             }
         });
 
-        waitOnQueue.start();
         jmsTemplate.convertAndSend("login",toSend);
 
+        Boolean response= false;
+
         try {
-            waitOnQueue.join();
+            response = waitOnQueue.get();
         } catch (InterruptedException e) {
             e.printStackTrace();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
         }
+        es.shutdown();
 
-        return true;
+        return response;
     }
 
     @Override
-    public List<Integer> makeMove(Move move) {
-        return null;
+    public boolean makeMove(Move move) {
+        return true;
     }
 
     @Override
@@ -88,53 +114,75 @@ public class RequestController implements Requestable {
 
         JoinContainer joinContainer = new JoinContainer(Account.getInstance().getNick(), gameID);
         String toSend = new Gson().toJson(joinContainer);
+        System.out.println(toSend);
+        toSend = new Gson().toJson(new Boolean(true));
 
-        Thread waitOnQueue = new Thread(new Runnable(){
-            public void run() {
-                System.out.println(jmsTemplate.receiveAndConvert("joinAsPlayer"));// login + hash
+        ExecutorService es = Executors.newSingleThreadExecutor();
+        Future<Boolean> waitOnQueue = es.submit(new Callable<Boolean>() {
+            public Boolean call() throws Exception {
+                String received = jmsTemplate.receiveAndConvert("joinAsPlayer").toString();// <-  + nick
+                boolean response = new Gson().fromJson(received,Boolean.class);
+                System.out.println(response);
+                return response;
             }
         });
 
-        waitOnQueue.start();
         jmsTemplate.convertAndSend("joinAsPlayer",toSend);
 
+        Boolean response= false;
+
         try {
-            waitOnQueue.join();
+            response = waitOnQueue.get();
         } catch (InterruptedException e) {
             e.printStackTrace();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
         }
-        return true;
+        es.shutdown();
+
+        return response;
     }
 
     @Override
     public boolean spectateGame(int gameID) {
 
         JoinContainer joinContainer = new JoinContainer(Account.getInstance().getNick(), gameID);
-        String toSend = new Gson().toJson(joinContainer);
+        String toSend = new Gson().toJson(joinContainer); // <-
+        System.out.println(toSend);
+        toSend = new Gson().toJson(new Boolean(true));
 
-        Thread waitOnQueue = new Thread(new Runnable(){
-            public void run() {
-                System.out.println(jmsTemplate.receiveAndConvert("spectateGame"));// +nick
+        ExecutorService es = Executors.newSingleThreadExecutor();
+        Future<Boolean> waitOnQueue = es.submit(new Callable<Boolean>() {
+            public Boolean call() throws Exception {
+                String received = jmsTemplate.receiveAndConvert("spectateGame").toString();// <-  + nick
+                boolean response = new Gson().fromJson(received,Boolean.class);
+                System.out.println(response);
+                return response;
             }
         });
 
-        waitOnQueue.start();
         jmsTemplate.convertAndSend("spectateGame",toSend);
 
+        Boolean response= false;
+
         try {
-            waitOnQueue.join();
+            response = waitOnQueue.get();
         } catch (InterruptedException e) {
             e.printStackTrace();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
         }
-        return true;
+        es.shutdown();
+
+        return response;
     }
 
     @Override
     public boolean quitGame(int gameID) {
         JoinContainer joinContainer = new JoinContainer(Account.getInstance().getNick(), gameID);
         String toSend = new Gson().toJson(joinContainer);
+        System.out.println(toSend);
         jmsTemplate.convertAndSend("quitGame",toSend);
-
         return true;
     }
 
@@ -143,33 +191,42 @@ public class RequestController implements Requestable {
 
         CreateGameContainer createContainer = new CreateGameContainer(Account.getInstance().getNick(), config);
         String toSend = new Gson().toJson(createContainer);
+        System.out.println(toSend);
+        toSend = new Gson().toJson(new Boolean(true));// mock
 
-
-        Thread waitOnQueue = new Thread(new Runnable(){
-            public void run() {
-                int gameID = Integer.parseInt(jmsTemplate.receiveAndConvert("createGame").toString());// +nick
-                System.out.println(gameID);
-                joinAsPlayer(gameID);
+        ExecutorService es = Executors.newSingleThreadExecutor();
+        Future<Boolean> waitOnQueue = es.submit(new Callable<Boolean>() {
+            public Boolean call() throws Exception {
+                String received = jmsTemplate.receiveAndConvert("createGame").toString();// <-  + nick
+                boolean response = new Gson().fromJson(received,Boolean.class);
+                System.out.println(response);
+                return response;
             }
         });
 
-        waitOnQueue.start();
-        //jmsTemplate.convertAndSend("createGame",toSend);
-        jmsTemplate.convertAndSend("createGame","112");
+        jmsTemplate.convertAndSend("createGame",toSend);
+
+        Boolean response= false;
 
         try {
-            waitOnQueue.join();
+            response = waitOnQueue.get();
         } catch (InterruptedException e) {
             e.printStackTrace();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
         }
+        es.shutdown();
 
-        return true;
+        return response;
     }
 
     @Override
     public void updateGame(GameState gameState) {
 
+
+
     }
+
 
 
 }

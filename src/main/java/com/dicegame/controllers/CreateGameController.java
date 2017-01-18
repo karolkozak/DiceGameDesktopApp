@@ -116,7 +116,7 @@ public class CreateGameController implements Initializable {
 
             Parent createGame = null;
             try {
-                createGame = FXMLLoader.load(getClass().getResource("../view/inGame.fxml"));
+                createGame = FXMLLoader.load(getClass().getResource("../view/listOfGames.fxml"));
             } catch (IOException e) {
                 e.printStackTrace();
             }
