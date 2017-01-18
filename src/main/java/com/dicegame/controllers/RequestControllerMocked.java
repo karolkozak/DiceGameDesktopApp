@@ -24,6 +24,8 @@ public class RequestControllerMocked implements Requestable {
 
     public static JmsTemplate jmsTemplate;
 
+    private List<Integer> dice= new ArrayList<Integer>(Arrays.asList(new Integer[]{1,4,3,2,5}));;
+
     @Override
     public List<Game> getGames() {
 
@@ -139,8 +141,11 @@ public class RequestControllerMocked implements Requestable {
 
         //mock update
         List<Player> playersList= new ArrayList<Player>();
-        playersList.add(new Player(Account.getInstance().getNick(),12,new ArrayList<Integer>(Arrays.asList(new Integer[]{1,4,3,2,5}))));
-        playersList.add(new Player("yoloGamble",12,new ArrayList<Integer>(Arrays.asList(new Integer[]{1,4,3,2,5}))));
+        for(Integer i : move.getDiceNumbers()){
+            this.dice.set(i-1,6);
+        }
+        playersList.add(new Player(Account.getInstance().getNick(),12,this.dice));
+        playersList.add(new Player("yoloGamble",12,new ArrayList<Integer>(Arrays.asList(new Integer[]{1,1,3,1,5}))));
         GameState gameState =new GameState(playersList, GameStatus.STARTED, "yoloGamble", 0, 0);
 
         toSend = new Gson().toJson(gameState);
@@ -269,8 +274,8 @@ public class RequestControllerMocked implements Requestable {
         Future<GameState> waitOnQueue = es.submit(new Callable<GameState>() {
             public GameState call() throws Exception {
                 String received = jmsTemplate.receiveAndConvert("updateGame").toString();// <-  + nick
+                System.out.println(received);
                 GameState response = new Gson().fromJson(received,GameState.class);
-                System.out.println(response);
                 return response;
             }
         });
@@ -278,7 +283,7 @@ public class RequestControllerMocked implements Requestable {
         if(mock!=0) {
         //mocked server response
             List<Player> playersList= new ArrayList<Player>();
-            playersList.add(new Player(Account.getInstance().getNick(),12,new ArrayList<Integer>(Arrays.asList(new Integer[]{1,4,3,2,5}))));
+            playersList.add(new Player(Account.getInstance().getNick(),12,dice));
             playersList.add(new Player("yoloGamble",12,new ArrayList<Integer>(Arrays.asList(new Integer[]{1,4,3,2,5}))));
             GameState gameState = null;
             if (mock == 1)

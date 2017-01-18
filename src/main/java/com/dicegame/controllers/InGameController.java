@@ -2,6 +2,7 @@ package com.dicegame.controllers;
 
 import com.dicegame.interfaces.Requestable;
 import com.dicegame.model.*;
+import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -121,7 +122,9 @@ public class InGameController implements Initializable {
                 }
             }
             this.gameState = serverCommunicator.updateGame(mock);
+
             this.updateTable(this.gameState);
+
             pass.setDisable(true);
             roll.setDisable(true);
 
@@ -142,7 +145,17 @@ public class InGameController implements Initializable {
         resultsTable.getItems().removeAll(resultsTable.getItems());
         players.forEach(player -> {
             this.playersInGame.add(player);
+
+            if(player.getName().equals(Account.getInstance().getNick())){
+
+                Platform.runLater(() -> box1.setText(player.getDice().get(0).toString())); // trzeba tak bo nawala Not fx thread exeption
+                Platform.runLater(() -> box2.setText(player.getDice().get(1).toString()));
+                Platform.runLater(() -> box3.setText(player.getDice().get(2).toString()));
+                Platform.runLater(() -> box4.setText(player.getDice().get(3).toString()));
+                Platform.runLater(() -> box5.setText(player.getDice().get(4).toString()));
+        }
         });
+
         resultsTable.setItems(this.playersInGame);
     }
 }

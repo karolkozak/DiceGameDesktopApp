@@ -12,4 +12,8 @@ public class Move {
     public Move( Set<Integer> diceNumbers) {
         this.diceNumbers = diceNumbers;
     }
+
+    public Set<Integer> getDiceNumbers() {
+        return diceNumbers;
+    }
 }

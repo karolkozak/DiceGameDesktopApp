@@ -35,7 +35,7 @@ public class RequestController implements Requestable {
             public List<Game> call() throws Exception {
                 String received = jmsTemplate.receiveAndConvert("getGames/".concat(nick)).toString();
                 List<Game> response = new Gson().fromJson(received,new TypeToken<List<Game>>(){}.getType());
-                System.out.println(response);
+                System.out.println(received);
                 return response;
             }
         });
@@ -237,8 +237,8 @@ public class RequestController implements Requestable {
         Future<GameState> waitOnQueue = es.submit(new Callable<GameState>() {
             public GameState call() throws Exception {
                 String received = jmsTemplate.receiveAndConvert("updateGame/".concat(Account.getInstance().getNick())).toString();// <-  + nick
+                System.out.println(received);
                 GameState response = new Gson().fromJson(received,GameState.class);
-                System.out.println(response);
                 return response;
             }
         });
