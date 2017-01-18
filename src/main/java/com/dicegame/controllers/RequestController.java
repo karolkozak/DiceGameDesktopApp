@@ -67,23 +67,21 @@ public class RequestController implements Requestable {
         ExecutorService es = Executors.newSingleThreadExecutor();
         Future<Boolean> waitOnQueue = es.submit(new Callable<Boolean>() {
             public Boolean call() throws Exception {
-                String received = jmsTemplate.receiveAndConvert("login/".concat(url)).toString();// <- login + hash
+                String received = jmsTemplate.receiveAndConvert(url).toString();// <- login + hash
                 boolean response = new Gson().fromJson(received,Boolean.class);
                 System.out.println(response);
                 return response;
             }
         });
 
-        jmsTemplate.convertAndSend("login",toSend);
+        jmsTemplate.convertAndSend("login",loginContainer);
 
         Boolean response= false;
 
         try {
             response = waitOnQueue.get();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        } catch (ExecutionException e) {
-            e.printStackTrace();
+        } catch (Exception e) {
+            System.out.println(e);
         }
         es.shutdown();
 

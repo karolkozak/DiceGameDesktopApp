@@ -1,5 +1,6 @@
 package com.dicegame.window;
 
+import com.dicegame.configuration.ConfigJMS;
 import com.dicegame.configuration.ConfigTopic;
 import com.dicegame.controllers.RequestController;
 import com.dicegame.controllers.RequestControllerMocked;
@@ -31,7 +32,7 @@ public class Main extends Application {
     public static void main(String[] args) {
 
         // Launch the application
-        ConfigurableApplicationContext context = SpringApplication.run(Main.class, args);
+        ConfigurableApplicationContext context = SpringApplication.run(ConfigJMS.class, args);
 
         JmsTemplate jmsTemplate = context.getBean(JmsTemplate.class);
 

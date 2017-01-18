@@ -6,10 +6,10 @@ package com.dicegame.model.containers;
 public class LoginContainer {
 
     private String nick;
-    private String url;
+    private String respondQueue;
 
     public LoginContainer(String nick, String url) {
         this.nick = nick;
-        this.url = url;
+        this.respondQueue = url;
     }
 }

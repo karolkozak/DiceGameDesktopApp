@@ -27,7 +27,7 @@ public class LoginController implements Initializable {
 
     }
 
-    Requestable serverCommunicator = new RequestControllerMocked();
+    Requestable serverCommunicator = new RequestController();
 
     @FXML
     public void handleLoginAction(ActionEvent actionEvent) throws IOException {
