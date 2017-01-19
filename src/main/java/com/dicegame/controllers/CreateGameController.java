@@ -4,6 +4,7 @@ import com.dicegame.model.BotConfiguration;
 import com.dicegame.model.BotLevel;
 import com.dicegame.model.Configuration;
 import com.dicegame.model.GameType;
+import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -55,10 +56,16 @@ public class CreateGameController implements Initializable {
     @FXML
     private TextField points;
 
+    @FXML
+    private Button createButton;
+
     Requestable serverCommunicator = new RequestControllerMocked();
 
     @FXML
     public void handleCreateGameAction(ActionEvent actionEvent) {
+
+        createButton.setDisable(true);
+
         Alert alert = new Alert(AlertType.INFORMATION);
         alert.setHeaderText(null);
         alert.setTitle("Create game exception!");
@@ -111,19 +118,29 @@ public class CreateGameController implements Initializable {
                                                         numberOfPointsToWin,
                                                         bots);
 
-        if(serverCommunicator.createGame(configuration)) {
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                if(serverCommunicator.createGame(configuration)) {
 
-            Parent createGame = null;
-            try {
-                createGame = FXMLLoader.load(getClass().getResource("../view/listOfGames.fxml"));
-            } catch (IOException e) {
-                e.printStackTrace();
+                    createButton.setDisable(false);
+                    Parent createGame = null;
+                    try {
+                        createGame = FXMLLoader.load(getClass().getResource("../view/listOfGames.fxml"));
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                    Scene home_page = new Scene(createGame);
+                    Stage app_stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
+                    Platform.runLater(() -> app_stage.setScene(home_page));
+                    Platform.runLater(() -> app_stage.show());
+
+                }else{
+                    createButton.setDisable(false);
+                }
             }
-            Scene home_page = new Scene(createGame);
-            Stage app_stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
-            app_stage.setScene(home_page);
-            app_stage.show();
-        }
+        }).start();
+
     }
 
     @FXML

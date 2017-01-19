@@ -61,6 +61,9 @@ public class LoginController implements Initializable {
                         Platform.runLater(() -> app_stage.setScene(home_page));
                         Platform.runLater(() -> app_stage.show());
 
+                    }else{
+                        loginButton.setDisable(false);
+                        nickField.setText("");
                     }
                 }
             }).start();

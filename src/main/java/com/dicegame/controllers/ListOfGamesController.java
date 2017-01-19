@@ -5,6 +5,7 @@ import com.dicegame.model.Account;
 import com.dicegame.model.Game;
 import com.dicegame.model.GameType;
 import com.dicegame.model.Player;
+import javafx.application.Platform;
 import javafx.beans.property.SimpleListProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
@@ -41,12 +42,20 @@ public class ListOfGamesController implements Initializable {
 
     @FXML
     private TableColumn<Game, GameType> gameTypeColumn;
-
     @FXML
     private TableColumn<Game, String> leftPlacesColumn;
-
     @FXML
     private TableColumn<Game, String> listOfPlayersColumn;
+
+    @FXML
+    private Button joinButton;
+    @FXML
+    private Button watchButton;
+    @FXML
+    private Button updateButton;
+    @FXML
+    private Button createButton;
+
 
     private ObservableList<Game> games = FXCollections.observableArrayList();
 
@@ -63,37 +72,82 @@ public class ListOfGamesController implements Initializable {
         listOfGames.setItems(games);
 
         //Initialize action is same as update
-        handleUpdateAction(new ActionEvent());
+        //handleUpdateAction(new ActionEvent());
     }
 
     @FXML
     public void handleUpdateAction(ActionEvent actionEvent) {
         //TODO: fetch data from server and show in table
 
+        createButton.setDisable(true);
+        joinButton.setDisable(true);
+        watchButton.setDisable(true);
+        updateButton.setDisable(true);
+
+
         listOfGames.getItems().removeAll(listOfGames.getItems());
 
-        for (Game g :serverCommunicator.getGames()){
-            games.add(g);
-        }
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                for (Game g :serverCommunicator.getGames()){
+                    games.add(g);
+                }
 
-        listOfGames.setItems(games);
+                createButton.setDisable(false);
+                joinButton.setDisable(false);
+                watchButton.setDisable(false);
+                updateButton.setDisable(false);
+
+                listOfGames.setItems(games);
+            }
+        }).start();
+
     }
 
     @FXML
     public void handleJoinAction(ActionEvent actionEvent) throws IOException {
         if(listOfGames.getSelectionModel().getSelectedItem()!= null) {
 
-            int gameID = listOfGames.getSelectionModel().getSelectedItem().getGameID();
-            if(serverCommunicator.joinAsPlayer(gameID)){
+            createButton.setDisable(true);
+            joinButton.setDisable(true);
+            watchButton.setDisable(true);
+            updateButton.setDisable(true);
 
-                Account.getInstance().setGameID(gameID);
+            new Thread(new Runnable() {
+                @Override
+                public void run() {
 
-                Parent createGame = FXMLLoader.load(getClass().getResource("../view/inGame.fxml"));
-                Scene home_page = new Scene(createGame);
-                Stage app_stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
-                app_stage.setScene(home_page);
-                app_stage.show();
-            }
+                    int gameID = listOfGames.getSelectionModel().getSelectedItem().getGameID();
+                    if (serverCommunicator.joinAsPlayer(gameID)) {
+
+                        Account.getInstance().setGameID(gameID);
+
+                        createButton.setDisable(false);
+                        joinButton.setDisable(false);
+                        watchButton.setDisable(false);
+                        updateButton.setDisable(false);
+
+                        Parent createGame = null;
+                        try {
+                            createGame = FXMLLoader.load(getClass().getResource("../view/inGame.fxml"));
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                        Scene home_page = new Scene(createGame);
+                        Stage app_stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
+                        Platform.runLater(() -> app_stage.setScene(home_page));
+                        Platform.runLater(() -> app_stage.show());
+
+                    }else{
+                        createButton.setDisable(false);
+                        joinButton.setDisable(false);
+                        watchButton.setDisable(false);
+                        updateButton.setDisable(false);
+                    }
+                }
+            }).start();
+
         }
     }
 
@@ -101,16 +155,45 @@ public class ListOfGamesController implements Initializable {
     public void handleWatchAction(ActionEvent actionEvent) throws IOException {
         if(listOfGames.getSelectionModel().getSelectedItem()!= null) {
 
-            int gameID = listOfGames.getSelectionModel().getSelectedItem().getGameID();
-            if(serverCommunicator.spectateGame(gameID)){
+            createButton.setDisable(true);
+            joinButton.setDisable(true);
+            watchButton.setDisable(true);
+            updateButton.setDisable(true);
 
-                Account.getInstance().setGameID(gameID);
-                Parent createGame = FXMLLoader.load(getClass().getResource("../view/inGame.fxml"));
-                Scene home_page = new Scene(createGame);
-                Stage app_stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
-                app_stage.setScene(home_page);
-                app_stage.show();
-            }
+            new Thread(new Runnable() {
+                @Override
+                public void run() {
+
+                    int gameID = listOfGames.getSelectionModel().getSelectedItem().getGameID();
+                    if (serverCommunicator.spectateGame(gameID)) {
+
+                        Account.getInstance().setGameID(gameID);
+
+                        createButton.setDisable(false);
+                        joinButton.setDisable(false);
+                        watchButton.setDisable(false);
+                        updateButton.setDisable(false);
+
+                        Parent createGame = null;
+                        try {
+                            createGame = FXMLLoader.load(getClass().getResource("../view/inGame.fxml"));
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                        Scene home_page = new Scene(createGame);
+                        Stage app_stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
+                        Platform.runLater(() -> app_stage.setScene(home_page));
+                        Platform.runLater(() -> app_stage.show());
+
+                    }else{
+                        createButton.setDisable(false);
+                        joinButton.setDisable(false);
+                        watchButton.setDisable(false);
+                        updateButton.setDisable(false);
+                    }
+                }
+            }).start();
+
         }
     }
 

@@ -28,20 +28,20 @@ public class RequestController implements Requestable {
     public List<Game> getGames() {
 
         String nick = Account.getInstance().getNick();
-        String toSend = new Gson().toJson(nick);
+        System.out.println(new Gson().toJson(nick));
 
         ExecutorService es = Executors.newSingleThreadExecutor();
         Future<List<Game>> waitOnQueue = es.submit(new Callable<List<Game>>() {
             public List<Game> call() throws Exception {
                 String received = jmsTemplate.receiveAndConvert("getGames/".concat(nick)).toString();
-                List<Game> response = new Gson().fromJson(received,new TypeToken<List<Game>>(){}.getType());
                 System.out.println(received);
+                List<Game> response = new Gson().fromJson(received,new TypeToken<List<Game>>(){}.getType());
+                System.out.println(response);
                 return response;
             }
         });
 
-        System.out.println(toSend);
-        jmsTemplate.convertAndSend("getGames",toSend);
+        jmsTemplate.convertAndSend("getGames",nick);
 
         List<Game> response= new ArrayList<>();
         try {
@@ -66,9 +66,11 @@ public class RequestController implements Requestable {
         ExecutorService es = Executors.newSingleThreadExecutor();
         Future<Boolean> waitOnQueue = es.submit(new Callable<Boolean>() {
             public Boolean call() throws Exception {
-                Boolean received = (Boolean)jmsTemplate.receiveAndConvert(url);// <- login + hash
+                String received = jmsTemplate.receiveAndConvert(url).toString();// <- login + hash
                 System.out.println(received);
-                return received;
+                Boolean response = new Gson().fromJson(received,Boolean.class);
+                System.out.println(response);
+                return response;
             }
         });
 
@@ -89,20 +91,20 @@ public class RequestController implements Requestable {
     @Override
     public boolean makeMove(Move move) {
         MakeMoveContainer makeMoveContainer = new MakeMoveContainer(Account.getInstance().getNick(), move);
-        String toSend = new Gson().toJson(makeMoveContainer);
-        System.out.println(toSend);
+        System.out.println(new Gson().toJson(makeMoveContainer));
 
         ExecutorService es = Executors.newSingleThreadExecutor();
         Future<Boolean> waitOnQueue = es.submit(new Callable<Boolean>() {
             public Boolean call() throws Exception {
                 String received = jmsTemplate.receiveAndConvert("makeMove/".concat(Account.getInstance().getNick())).toString();
+                System.out.println(received);
                 boolean response = new Gson().fromJson(received,Boolean.class);
                 System.out.println(response);
                 return response;
             }
         });
 
-        jmsTemplate.convertAndSend("makeMove",toSend);
+        jmsTemplate.convertAndSend("makeMove",makeMoveContainer);
 
         Boolean response= false;
 
@@ -122,8 +124,7 @@ public class RequestController implements Requestable {
     public boolean joinAsPlayer(int gameID) {
 
         JoinContainer joinContainer = new JoinContainer(Account.getInstance().getNick(), gameID);
-        String toSend = new Gson().toJson(joinContainer);
-        System.out.println(toSend);
+        System.out.println(new Gson().toJson(joinContainer));
 
         ExecutorService es = Executors.newSingleThreadExecutor();
         Future<Boolean> waitOnQueue = es.submit(new Callable<Boolean>() {
@@ -135,7 +136,7 @@ public class RequestController implements Requestable {
             }
         });
 
-        jmsTemplate.convertAndSend("joinAsPlayer",toSend);
+        jmsTemplate.convertAndSend("joinAsPlayer",joinContainer);
         Boolean response= false;
 
         try {
@@ -154,8 +155,7 @@ public class RequestController implements Requestable {
     public boolean spectateGame(int gameID) {
 
         JoinContainer joinContainer = new JoinContainer(Account.getInstance().getNick(), gameID);
-        String toSend = new Gson().toJson(joinContainer);
-        System.out.println(toSend);
+        System.out.println(new Gson().toJson(joinContainer));
 
         ExecutorService es = Executors.newSingleThreadExecutor();
         Future<Boolean> waitOnQueue = es.submit(new Callable<Boolean>() {
@@ -167,7 +167,7 @@ public class RequestController implements Requestable {
             }
         });
 
-        jmsTemplate.convertAndSend("spectateGame",toSend);
+        jmsTemplate.convertAndSend("spectateGame",joinContainer);
 
         Boolean response= false;
 
@@ -186,9 +186,8 @@ public class RequestController implements Requestable {
     @Override
     public boolean quitGame(int gameID) {
         JoinContainer joinContainer = new JoinContainer(Account.getInstance().getNick(), gameID);
-        String toSend = new Gson().toJson(joinContainer);
-        System.out.println(toSend);
-        jmsTemplate.convertAndSend("quitGame",toSend);
+        System.out.println(new Gson().toJson(joinContainer));
+        jmsTemplate.convertAndSend("quitGame",joinContainer);
         return true;
     }
 
@@ -196,8 +195,7 @@ public class RequestController implements Requestable {
     public boolean createGame(Configuration config) {
 
         CreateGameContainer createContainer = new CreateGameContainer(Account.getInstance().getNick(), config);
-        String toSend = new Gson().toJson(createContainer);
-        System.out.println(toSend);
+        System.out.println(new Gson().toJson(createContainer));
 
         ExecutorService es = Executors.newSingleThreadExecutor();
         Future<Boolean> waitOnQueue = es.submit(new Callable<Boolean>() {
@@ -209,7 +207,7 @@ public class RequestController implements Requestable {
             }
         });
 
-        jmsTemplate.convertAndSend("createGame",toSend);
+        jmsTemplate.convertAndSend("createGame",createContainer);
 
         Boolean response= false;
 
@@ -235,6 +233,7 @@ public class RequestController implements Requestable {
                 String received = jmsTemplate.receiveAndConvert("updateGame/".concat(Account.getInstance().getNick())).toString();// <-  + nick
                 System.out.println(received);
                 GameState response = new Gson().fromJson(received,GameState.class);
+                System.out.println(response);
                 return response;
             }
         });
