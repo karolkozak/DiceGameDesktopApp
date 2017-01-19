@@ -26,8 +26,8 @@ import javax.jms.*;
 @EnableJms
 public class ConfigJMS {
 
-    private static final String OUTER_BROKER_URL = "tcp://localhost:61616";
-    //private static final String OUTER_BROKER_URL = "tcp://192.168.43.111:61616";
+    //private static final String OUTER_BROKER_URL = "tcp://localhost:61616";
+    private static final String OUTER_BROKER_URL = "tcp://192.168.43.111:61616";
     private static final String BROKER_URL = "vm://localhost?broker.persistent=false";  // persistent - message won't be saved to drive
     private static final String username = "admin";
     private static final String password = "admin";

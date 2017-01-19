@@ -1,13 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="8f3488a2-9288-4fc9-aafa-a84948312037" name="Default" comment="po spotkaniu">
+    <list default="true" id="8f3488a2-9288-4fc9-aafa-a84948312037" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/DiceGameDemo.iws" afterPath="$PROJECT_DIR$/DiceGameDemo.iws" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/dicegame/configuration/ConfigJMS.java" afterPath="$PROJECT_DIR$/src/main/java/com/dicegame/configuration/ConfigJMS.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/dicegame/controllers/LoginController.java" afterPath="$PROJECT_DIR$/src/main/java/com/dicegame/controllers/LoginController.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/dicegame/controllers/RequestController.java" afterPath="$PROJECT_DIR$/src/main/java/com/dicegame/controllers/RequestController.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/dicegame/controllers/RequestControllerMocked.java" afterPath="$PROJECT_DIR$/src/main/java/com/dicegame/controllers/RequestControllerMocked.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/dicegame/view/login.fxml" afterPath="$PROJECT_DIR$/src/main/java/com/dicegame/view/login.fxml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/dicegame/window/Main.java" afterPath="$PROJECT_DIR$/src/main/java/com/dicegame/window/Main.java" />
     </list>
     <ignored path="$PROJECT_DIR$/.gradle/" />
@@ -87,107 +84,23 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="InGameController.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/dicegame/controllers/InGameController.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="181">
-              <caret line="156" column="90" lean-forward="true" selection-start-line="156" selection-start-column="16" selection-end-line="156" selection-end-column="90" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="ConfigJMS.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/dicegame/configuration/ConfigJMS.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="266">
-              <caret line="103" column="0" lean-forward="true" selection-start-line="103" selection-start-column="0" selection-end-line="103" selection-end-column="0" />
-              <folding>
-                <element signature="imports" expanded="true" />
-                <element signature="e#4084#4085#0" expanded="true" />
-                <element signature="e#4156#4157#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="RequestControllerMocked.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/dicegame/controllers/RequestControllerMocked.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-799">
-              <caret line="55" column="11" lean-forward="true" selection-start-line="55" selection-start-column="11" selection-end-line="55" selection-end-column="11" />
+            <state relative-caret-position="3907">
+              <caret line="269" column="83" lean-forward="false" selection-start-line="269" selection-start-column="83" selection-end-line="269" selection-end-column="83" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
             </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="CreateGameController.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/dicegame/controllers/CreateGameController.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="17">
-              <caret line="112" column="0" lean-forward="true" selection-start-line="112" selection-start-column="0" selection-end-line="112" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="LoginController.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/dicegame/controllers/LoginController.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="272">
-              <caret line="63" column="21" lean-forward="true" selection-start-line="63" selection-start-column="21" selection-end-line="63" selection-end-column="21" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="login.fxml" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/dicegame/view/login.fxml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="68">
-              <caret line="10" column="34" lean-forward="false" selection-start-line="10" selection-start-column="34" selection-end-line="10" selection-end-column="34" />
-              <folding />
-            </state>
-          </provider>
-          <provider editor-type-id="JavaFX-Scene-Builder">
-            <state />
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Main.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/dicegame/window/Main.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="187">
-              <caret line="35" column="10" lean-forward="false" selection-start-line="35" selection-start-column="10" selection-end-line="35" selection-end-column="10" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="listOfGames.fxml" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/dicegame/view/listOfGames.fxml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="0">
-              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-          <provider editor-type-id="JavaFX-Scene-Builder">
-            <state />
           </provider>
         </entry>
       </file>
       <file leaf-file-name="ListOfGamesController.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/dicegame/controllers/ListOfGamesController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="28">
-              <caret line="103" column="28" lean-forward="false" selection-start-line="103" selection-start-column="28" selection-end-line="103" selection-end-column="28" />
+            <state relative-caret-position="117">
+              <caret line="73" column="0" lean-forward="false" selection-start-line="73" selection-start-column="0" selection-end-line="73" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -614,7 +527,6 @@
         <option value="$PROJECT_DIR$/src/main/java/com/dicegame/model/Account.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/dicegame/model/GameState.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/dicegame/interfaces/Requestable.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/dicegame/controllers/ListOfGamesController.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/dicegame/controllers/CreateGameController.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/dicegame/view/inGame.fxml" />
         <option value="$PROJECT_DIR$/src/main/java/com/dicegame/model/Move.java" />
@@ -624,9 +536,10 @@
         <option value="$PROJECT_DIR$/src/main/java/com/dicegame/model/containers/LoginContainer.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/dicegame/view/login.fxml" />
         <option value="$PROJECT_DIR$/src/main/java/com/dicegame/controllers/LoginController.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/dicegame/window/Main.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/dicegame/configuration/ConfigJMS.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/dicegame/controllers/RequestController.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/dicegame/configuration/ConfigJMS.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/dicegame/window/Main.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/dicegame/controllers/ListOfGamesController.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/dicegame/controllers/RequestControllerMocked.java" />
       </list>
     </option>
@@ -1364,7 +1277,14 @@
       <option name="project" value="LOCAL" />
       <updated>1484762020545</updated>
     </task>
-    <option name="localTasksCounter" value="21" />
+    <task id="LOCAL-00021" summary="trzeba wszystkie button action ww osobnym watku&#10;usuwam nadmeirne gsonwnie">
+      <created>1484817185912</created>
+      <option name="number" value="00021" />
+      <option name="presentableId" value="LOCAL-00021" />
+      <option name="project" value="LOCAL" />
+      <updated>1484817185912</updated>
+    </task>
+    <option name="localTasksCounter" value="22" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -1453,7 +1373,8 @@
     <MESSAGE value="comment test" />
     <MESSAGE value="nic takiego" />
     <MESSAGE value="po spotkaniu" />
-    <option name="LAST_COMMIT_MESSAGE" value="po spotkaniu" />
+    <MESSAGE value="trzeba wszystkie button action ww osobnym watku&#10;usuwam nadmeirne gsonwnie" />
+    <option name="LAST_COMMIT_MESSAGE" value="trzeba wszystkie button action ww osobnym watku&#10;usuwam nadmeirne gsonwnie" />
     <option name="MAKE_NEW_CHANGELIST_ACTIVE" value="true" />
   </component>
   <component name="XDebuggerManager">
@@ -1465,14 +1386,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/dicegame/controllers/LoginController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/dicegame/window/Main.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="238">
@@ -1756,47 +1669,10 @@
         <state />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/dicegame/view/listOfGames.fxml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-      <provider editor-type-id="JavaFX-Scene-Builder">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/dicegame/controllers/ListOfGamesController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="28">
-          <caret line="103" column="28" lean-forward="false" selection-start-line="103" selection-start-column="28" selection-end-line="103" selection-end-column="28" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/dicegame/controllers/InGameController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="181">
-          <caret line="156" column="90" lean-forward="true" selection-start-line="156" selection-start-column="16" selection-end-line="156" selection-end-column="90" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/dicegame/controllers/LoginController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="272">
-          <caret line="63" column="21" lean-forward="true" selection-start-line="63" selection-start-column="21" selection-end-line="63" selection-end-column="21" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/dicegame/window/Main.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/dicegame/controllers/RequestController.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="187">
-          <caret line="35" column="10" lean-forward="false" selection-start-line="35" selection-start-column="10" selection-end-line="35" selection-end-column="10" />
+          <caret line="73" column="0" lean-forward="true" selection-start-line="73" selection-start-column="0" selection-end-line="73" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
@@ -1805,8 +1681,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/dicegame/configuration/ConfigJMS.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="266">
-          <caret line="103" column="0" lean-forward="true" selection-start-line="103" selection-start-column="0" selection-end-line="103" selection-end-column="0" />
+        <state relative-caret-position="215">
+          <caret line="97" column="13" lean-forward="true" selection-start-line="97" selection-start-column="13" selection-end-line="97" selection-end-column="13" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="e#4084#4085#0" expanded="true" />
@@ -1815,10 +1691,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/dicegame/controllers/RequestController.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/dicegame/controllers/InGameController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="187">
-          <caret line="73" column="0" lean-forward="true" selection-start-line="73" selection-start-column="0" selection-end-line="73" selection-end-column="0" />
+        <state relative-caret-position="181">
+          <caret line="156" column="90" lean-forward="true" selection-start-line="156" selection-start-column="16" selection-end-line="156" selection-end-column="90" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
@@ -1833,10 +1709,55 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/dicegame/window/Main.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="170">
+          <caret line="34" column="94" lean-forward="false" selection-start-line="34" selection-start-column="94" selection-end-line="34" selection-end-column="94" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://C:/Program Files/Java/jdk1.8.0_65/src.zip!/java/lang/Thread.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="142">
+          <caret line="744" column="0" lean-forward="false" selection-start-line="744" selection-start-column="0" selection-end-line="744" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/dicegame/view/listOfGames.fxml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+      <provider editor-type-id="JavaFX-Scene-Builder">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/dicegame/controllers/LoginController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="134">
+          <caret line="54" column="0" lean-forward="false" selection-start-line="54" selection-start-column="0" selection-end-line="54" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/dicegame/controllers/ListOfGamesController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="117">
+          <caret line="73" column="0" lean-forward="false" selection-start-line="73" selection-start-column="0" selection-end-line="73" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/dicegame/controllers/RequestControllerMocked.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-799">
-          <caret line="55" column="11" lean-forward="true" selection-start-line="55" selection-start-column="11" selection-end-line="55" selection-end-column="11" />
+        <state relative-caret-position="3907">
+          <caret line="269" column="83" lean-forward="false" selection-start-line="269" selection-start-column="83" selection-end-line="269" selection-end-column="83" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
