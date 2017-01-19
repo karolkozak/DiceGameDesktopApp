@@ -33,8 +33,11 @@ public class Main extends Application {
 
         // Launch the application
         ConfigurableApplicationContext context = SpringApplication.run(ConfigJMS.class, args);
+        //ConfigurableApplicationContext context = SpringApplication.run(Main.class, args);
 
         JmsTemplate jmsTemplate = context.getBean(JmsTemplate.class);
+        System.out.println(jmsTemplate.getMessageConverter().toString());
+
 
         RequestController.jmsTemplate=jmsTemplate;
         RequestControllerMocked.jmsTemplate=jmsTemplate;

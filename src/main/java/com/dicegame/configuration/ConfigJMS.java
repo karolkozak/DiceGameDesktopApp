@@ -26,8 +26,8 @@ import javax.jms.*;
 @EnableJms
 public class ConfigJMS {
 
-    //private static final String OUTER_BROKER_URL = "tcp://localhost:61616";
-    private static final String OUTER_BROKER_URL = "tcp://192.168.43.111:61616";
+    private static final String OUTER_BROKER_URL = "tcp://localhost:61616";
+    //private static final String OUTER_BROKER_URL = "tcp://192.168.43.111:61616";
     private static final String BROKER_URL = "vm://localhost?broker.persistent=false";  // persistent - message won't be saved to drive
     private static final String username = "admin";
     private static final String password = "admin";
@@ -35,7 +35,7 @@ public class ConfigJMS {
     @Bean
     public ConnectionFactory connectionFactory(){
         ActiveMQConnectionFactory connectionFactory = new ActiveMQConnectionFactory();
-        connectionFactory.setBrokerURL(OUTER_BROKER_URL);   // change to OUTER_BROKER_URL when actimeMQ run separately
+        connectionFactory.setBrokerURL(BROKER_URL);   // change to OUTER_BROKER_URL when actimeMQ run separately
         connectionFactory.setUserName(username);
         connectionFactory.setPassword(password);
         connectionFactory.setTrustAllPackages(true);
@@ -91,17 +91,15 @@ public class ConfigJMS {
                     throw new MessageConversionException("Cannot convert from not TextMessage.");
                 }
             }
+
+            @Override
+            public String toString() {
+                return super.toString().concat("MyGSON");
+            }
         };
 
         return gsonConverter;
     }
 
 
-    @Bean // Serialize message content to json using TextMessage
-    public MessageConverter jacksonJmsMessageConverter() {
-        MappingJackson2MessageConverter converter = new MappingJackson2MessageConverter();
-        converter.setTargetType(MessageType.TEXT);
-        converter.setTypeIdPropertyName("_type");
-        return converter;
-    }
 }

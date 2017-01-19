@@ -30,8 +30,7 @@ public class RequestControllerMocked implements Requestable {
     public List<Game> getGames() {
 
         String nick = Account.getInstance().getNick();
-        String toSend = new Gson().toJson(nick);
-
+        System.out.println(new Gson().toJson(nick));
 
         ///mock wysylam sobie jakas gre
         int gameID =124;
@@ -43,18 +42,16 @@ public class RequestControllerMocked implements Requestable {
         GameState gameState = new GameState(lPlayers,null,null,0,0);
         Game game = new Game(gameID,gType,lPlaces,gameState);
 
-        List<Game> toSendArray = new ArrayList<>();
-        toSendArray.add(game);
-        toSend = new Gson().toJson(toSendArray);
+        List<Game> toSend = new ArrayList<>();
+        toSend.add(game);
         //
 
         ExecutorService es = Executors.newSingleThreadExecutor();
         Future<List<Game>> waitOnQueue = es.submit(new Callable<List<Game>>() {
             public List<Game> call() throws Exception {
-                String received = jmsTemplate.receiveAndConvert("getGames").toString();// <- getGames/nick
-                List<Game> response = new Gson().fromJson(received,new TypeToken<List<Game>>(){}.getType());
-                System.out.println(response);
-                return response;
+                List<Game> received = (ArrayList<Game>)jmsTemplate.receiveAndConvert("getGames");// <- getGames/nick
+                System.out.println(new Gson().toJson(received));
+                return received ;
             }
         });
 
@@ -79,17 +76,16 @@ public class RequestControllerMocked implements Requestable {
 
         String url = "someHash";
         LoginContainer loginContainer = new LoginContainer(nick, url);
-        String toSend = new Gson().toJson(loginContainer); // <-
-        System.out.println(toSend);
-        toSend = new Gson().toJson(new Boolean(true));
+        System.out.println(new Gson().toJson(loginContainer));
+        Boolean toSend = new Boolean(true);
 
         ExecutorService es = Executors.newSingleThreadExecutor();
         Future<Boolean> waitOnQueue = es.submit(new Callable<Boolean>() {
             public Boolean call() throws Exception {
-                String received = jmsTemplate.receiveAndConvert("login").toString();// <- login + hash
-                boolean response = new Gson().fromJson(received,Boolean.class);
-                System.out.println(response);
-                return response;
+
+                Boolean received = (Boolean)jmsTemplate.receiveAndConvert("login");// <- login + hash
+                System.out.println(received);
+                return received;
             }
         });
 

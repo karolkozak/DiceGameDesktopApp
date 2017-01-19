@@ -61,16 +61,14 @@ public class RequestController implements Requestable {
 
         String url = "someHash";
         LoginContainer loginContainer = new LoginContainer(nick, url);
-        String toSend = new Gson().toJson(loginContainer); // <-
-        System.out.println(toSend);
+        System.out.println(new Gson().toJson(loginContainer));
 
         ExecutorService es = Executors.newSingleThreadExecutor();
         Future<Boolean> waitOnQueue = es.submit(new Callable<Boolean>() {
             public Boolean call() throws Exception {
-                String received = jmsTemplate.receiveAndConvert(url).toString();// <- login + hash
-                boolean response = new Gson().fromJson(received,Boolean.class);
-                System.out.println(response);
-                return response;
+                Boolean received = (Boolean)jmsTemplate.receiveAndConvert(url);// <- login + hash
+                System.out.println(received);
+                return received;
             }
         });
 
