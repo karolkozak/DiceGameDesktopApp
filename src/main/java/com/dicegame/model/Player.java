@@ -1,5 +1,8 @@
 package com.dicegame.model;
 
+import javafx.beans.property.SimpleObjectProperty;
+import javafx.beans.property.SimpleStringProperty;
+
 import java.util.List;
 
 /**
@@ -35,5 +38,17 @@ public class Player {
 
     public String toString() {
         return name;
+    }
+
+    public SimpleStringProperty getPlayerNameProperties() {
+        return new SimpleStringProperty(name);
+    }
+
+    public SimpleStringProperty getPointsProperties() {
+        return new SimpleStringProperty(String.valueOf(points));
+    }
+
+    public SimpleStringProperty getListOfDiceProperties() {
+        return new SimpleStringProperty(dice.toString());
     }
 }

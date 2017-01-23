@@ -1,6 +1,9 @@
 package com.dicegame.window;
 
+import com.dicegame.configuration.ConfigJMS;
 import com.dicegame.configuration.ConfigTopic;
+import com.dicegame.controllers.RequestController;
+import com.dicegame.controllers.RequestControllerMocked;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -10,6 +13,8 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.jms.core.JmsTemplate;
+
+import java.util.ArrayList;
 
 @SpringBootApplication
 public class Main extends Application {
@@ -27,9 +32,14 @@ public class Main extends Application {
     public static void main(String[] args) {
 
         // Launch the application
-        ConfigurableApplicationContext context = SpringApplication.run(Main.class, args);
+        ConfigurableApplicationContext context = SpringApplication.run(ConfigJMS.class, args);
 
         JmsTemplate jmsTemplate = context.getBean(JmsTemplate.class);
+        System.out.println(jmsTemplate.getMessageConverter().toString());
+
+
+        RequestController.jmsTemplate=jmsTemplate;
+        RequestControllerMocked.jmsTemplate=jmsTemplate;
 
         launch(args);
 

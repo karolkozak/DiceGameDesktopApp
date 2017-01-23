@@ -15,19 +15,19 @@
             <TableColumn fx:id="listOfPlayersColumn" prefWidth="217.0" text="Lista graczy" />
         </columns>
       </TableView>
-      <Button id="update" layoutX="89.0" layoutY="324.0" mnemonicParsing="false" onAction="#handleUpdateAction" text="Aktualizuj listę">
+      <Button fx:id="updateButton" id="update" layoutX="89.0" layoutY="324.0" mnemonicParsing="false" onAction="#handleUpdateAction" text="Aktualizuj listę">
          <font>
             <Font size="14.0" />
          </font></Button>
-      <Button id="join" layoutX="228.0" layoutY="324.0" mnemonicParsing="false" onAction="#handleJoinAction" text="Dołącz">
+      <Button fx:id="joinButton" id="join" layoutX="228.0" layoutY="324.0" mnemonicParsing="false" onAction="#handleJoinAction" text="Dołącz">
          <font>
             <Font size="14.0" />
          </font></Button>
-      <Button id="watch" layoutX="319.0" layoutY="324.0" mnemonicParsing="false" onAction="#handleWatchAction" text="Obserwuj">
+      <Button fx:id="watchButton" id="watch" layoutX="319.0" layoutY="324.0" mnemonicParsing="false" onAction="#handleWatchAction" text="Obserwuj">
          <font>
             <Font size="14.0" />
          </font></Button>
-      <Button id="createGame" layoutX="425.0" layoutY="324.0" mnemonicParsing="false" onAction="#handleCreateGameAction" text="Stwórz grę">
+      <Button fx:id="createButton" id="createGame" layoutX="425.0" layoutY="324.0" mnemonicParsing="false" onAction="#handleCreateGameAction" text="Stwórz grę">
          <font>
             <Font size="14.0" />
          </font></Button>

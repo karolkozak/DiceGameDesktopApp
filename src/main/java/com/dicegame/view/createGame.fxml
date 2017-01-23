@@ -12,7 +12,7 @@
 
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.dicegame.controllers.CreateGameController">
    <children>
-      <Button layoutX="164.0" layoutY="323.0" mnemonicParsing="false" onAction="#handleCreateGameAction" text="Stwórz grę">
+      <Button fx:id="createButton" layoutX="164.0" layoutY="323.0" mnemonicParsing="false" onAction="#handleCreateGameAction" text="Stwórz grę">
          <font>
             <Font size="14.0" />
          </font>
