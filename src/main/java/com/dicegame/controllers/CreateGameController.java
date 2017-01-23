@@ -1,8 +1,10 @@
 package com.dicegame.controllers;
+import com.dicegame.interfaces.Requestable;
 import com.dicegame.model.BotConfiguration;
 import com.dicegame.model.BotLevel;
 import com.dicegame.model.Configuration;
 import com.dicegame.model.GameType;
+import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -55,13 +57,21 @@ public class CreateGameController implements Initializable {
     private TextField points;
 
     @FXML
+    private Button createButton;
+
+    Requestable serverCommunicator = new RequestControllerMocked();
+
+    @FXML
     public void handleCreateGameAction(ActionEvent actionEvent) {
+
+        createButton.setDisable(true);
+
         Alert alert = new Alert(AlertType.INFORMATION);
         alert.setHeaderText(null);
         alert.setTitle("Create game exception!");
 
         GameType gameType = GameType.get(modeComboBox.getValue());
-        System.out.println(gameType);
+        //System.out.println(gameType);
         if(gameType == null) {
             alert.setContentText("Game type cannot be null!");
             alert.showAndWait();
@@ -107,19 +117,30 @@ public class CreateGameController implements Initializable {
                                                         gameType,
                                                         numberOfPointsToWin,
                                                         bots);
-        //TODO: send configuration to server
 
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                if(serverCommunicator.createGame(configuration)) {
 
-        Parent createGame = null;
-        try {
-            createGame = FXMLLoader.load(getClass().getResource("../view/listOfGames.fxml"));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        Scene home_page = new Scene(createGame);
-        Stage app_stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
-        app_stage.setScene(home_page);
-        app_stage.show();
+                    createButton.setDisable(false);
+                    Parent createGame = null;
+                    try {
+                        createGame = FXMLLoader.load(getClass().getResource("../view/listOfGames.fxml"));
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                    Scene home_page = new Scene(createGame);
+                    Stage app_stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
+                    Platform.runLater(() -> app_stage.setScene(home_page));
+                    Platform.runLater(() -> app_stage.show());
+
+                }else{
+                    createButton.setDisable(false);
+                }
+            }
+        }).start();
+
     }
 
     @FXML
@@ -159,7 +180,8 @@ public class CreateGameController implements Initializable {
 
         numberOfPlayersSpinner.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(
                 0, 10000, 0));
-        numberOfPlayersSpinner.setEditable(true);
+        
+        numberOfPlayersSpinner.setEditable(false);
 
         botLevelItems.add("Latwy");
         botLevelItems.add("Mistrz");
