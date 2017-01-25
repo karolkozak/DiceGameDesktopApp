@@ -1,6 +1,8 @@
-package com.dicegame.tests;
-
+//package com.dicegame.tests;
+//
 //import javax.jms.ConnectionFactory;
+//import javax.jms.JMSException;
+//import javax.jms.TextMessage;
 //
 //import org.springframework.boot.SpringApplication;
 //import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -14,13 +16,13 @@ package com.dicegame.tests;
 //import org.springframework.jms.support.converter.MappingJackson2MessageConverter;
 //import org.springframework.jms.support.converter.MessageConverter;
 //import org.springframework.jms.support.converter.MessageType;
-/**
- * Created by Karol on 09/01/2017.
- */
+///**
+// * Created by Karol on 09/01/2017.
+// */
 //@SpringBootApplication
 //@EnableJms
-public class Application {
-
+//public class Application {
+//
 //    @Bean
 //    public JmsListenerContainerFactory<?> myFactory(ConnectionFactory connectionFactory,
 //                                                    DefaultJmsListenerContainerFactoryConfigurer configurer) {
@@ -39,14 +41,29 @@ public class Application {
 //        return converter;
 //    }
 //
-//    public static void main(String[] args) {
+//    public static void main(String[] args){
 //        // Launch the application
 //        ConfigurableApplicationContext context = SpringApplication.run(Application.class, args);
 //
 //        JmsTemplate jmsTemplate = context.getBean(JmsTemplate.class);
 //
 //        // Send a message with a POJO - the template reuse the message converter
+//
+//        new Thread(new Runnable(){
+//            public void run() {
+//                System.out.println("received");
+//                System.out.println(jmsTemplate.receiveAndConvert("mailbox"));
+//                System.out.println("received2");
+//            }
+//        }).start();
+//
+//        try {
+//            Thread.sleep(1000);
+//        } catch (InterruptedException e) {
+//            e.printStackTrace();}
+//
 //        System.out.println("Sending an email message.");
 //        jmsTemplate.convertAndSend("mailbox", new String("info@example.com"));
 //    }
-}
+//
+//}

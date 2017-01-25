@@ -1,5 +1,6 @@
 package com.dicegame.model.containers;
 
+import com.dicegame.model.Configuration;
 import com.dicegame.model.Move;
 
 /**
@@ -8,10 +9,10 @@ import com.dicegame.model.Move;
 public class CreateGameContainer {
 
     private String nick;
-    private Move move;
+    private Configuration configuration;
 
-    public CreateGameContainer(String nick, Move move) {
+    public CreateGameContainer(String nick, Configuration configuration) {
         this.nick = nick;
-        this.move = move;
+        this.configuration = configuration;
     }
 }

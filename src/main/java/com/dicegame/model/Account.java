@@ -6,6 +6,7 @@ package com.dicegame.model;
 public class Account {
 
     private String nick;
+    private int gameID;
     private static Account instance = null;
 
     private Account(){}
@@ -26,5 +27,13 @@ public class Account {
 
     public void setNick(String nick) {
         instance.nick = nick;
+    }
+
+    public int getGameID() {
+        return instance.gameID;
+    }
+
+    public void setGameID(int gameID) {
+        this.instance.gameID = gameID;
     }
 }

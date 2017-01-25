@@ -20,6 +20,10 @@ repositories {
     mavenCentral()
 }
 
+sourceSets.main.resources {
+    srcDirs = ["src/main/java"]; //assume that your java classes are inside this path
+    exclude "**/*.java"
+}
 sourceCompatibility = 1.8
 targetCompatibility = 1.8
 
