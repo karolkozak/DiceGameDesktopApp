@@ -9,11 +9,12 @@
 
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="422.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.dicegame.controllers.InGameController">
    <children>
-      <TableView fx:id="resultsTable" layoutX="56.0" layoutY="34.0" prefHeight="321.0" prefWidth="369.0">
+      <TableView fx:id="resultsTable" layoutX="28.0" layoutY="34.0" prefHeight="321.0" prefWidth="397.0">
         <columns>
-          <TableColumn fx:id="playerColumn" editable="false" prefWidth="106.0" sortable="false" text="Player" />
-          <TableColumn fx:id="diceColumn" editable="false" prefWidth="120.0" sortable="false" text="Dice" />
-            <TableColumn fx:id="pointsColumn" editable="false" prefWidth="142.0" sortable="false" text="Points" />
+            <TableColumn fx:id="activeColumn" prefWidth="47.0" text="Active" />
+          <TableColumn fx:id="playerColumn" editable="false" prefWidth="121.0" sortable="false" text="Player" />
+          <TableColumn fx:id="diceColumn" editable="false" prefWidth="142.0" sortable="false" text="Dice" />
+            <TableColumn fx:id="pointsColumn" editable="false" prefWidth="86.0" sortable="false" text="Points" />
         </columns>
       </TableView>
       <Button fx:id="roll" layoutX="443.0" layoutY="196.0" mnemonicParsing="false" onAction="#handleRollAction" prefHeight="30.0" prefWidth="114.0" text="roll selected">
