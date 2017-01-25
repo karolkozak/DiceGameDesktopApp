@@ -56,7 +56,7 @@ public class InGameController implements Initializable {
     private Button surrender;
 
     private ObservableList<InGameRow> playersInGame = FXCollections.observableArrayList();
-    private Requestable serverCommunicator = new RequestControllerMocked();
+    private Requestable serverCommunicator = new RequestController();
     private GameState gameState;
 
     @Override
