@@ -76,7 +76,7 @@ public class LoginController implements Initializable {
     }
 
     private boolean isValid(String nick){
-        return nick.matches("[^!$()-+~#@*+%{}<>\\[\\]|\"_^/\\\\]*");
+        return nick.matches("[^!$()-+~#@*+%{}<>\\[\\]|\"_^/\\\\]*") && !nick.equals("");
     }
 
 }

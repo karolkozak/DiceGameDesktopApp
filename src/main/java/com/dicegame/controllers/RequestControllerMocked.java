@@ -8,8 +8,6 @@ import com.dicegame.model.containers.LoginContainer;
 import com.dicegame.model.containers.MakeMoveContainer;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.jms.core.JmsTemplate;
 
 import java.util.ArrayList;
@@ -137,7 +135,7 @@ public class RequestControllerMocked implements Requestable {
 
         //mock update
         List<Player> playersList= new ArrayList<Player>();
-        for(Integer i : move.getDiceNumbers()){
+        for(Integer i : move.getDice()){
             this.dice.set(i-1,6);
         }
         playersList.add(new Player(Account.getInstance().getNick(),12,this.dice));
