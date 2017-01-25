@@ -59,7 +59,7 @@ public class ListOfGamesController implements Initializable {
 
     private ObservableList<Game> games = FXCollections.observableArrayList();
 
-    private Requestable serverCommunicator = new RequestControllerMocked();
+    private Requestable serverCommunicator = new RequestController();
 
 
     @Override

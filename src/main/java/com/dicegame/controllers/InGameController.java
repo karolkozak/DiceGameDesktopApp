@@ -2,6 +2,7 @@ package com.dicegame.controllers;
 
 import com.dicegame.interfaces.Requestable;
 import com.dicegame.model.*;
+import com.dicegame.model.containers.InGameRow;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -28,13 +29,15 @@ import java.util.*;
 public class InGameController implements Initializable {
 
     @FXML
-    private TableView<Player> resultsTable;
+    private TableView<InGameRow> resultsTable;
     @FXML
-    private TableColumn<Player, String> playerColumn;
+    private TableColumn<InGameRow, String> playerColumn;
     @FXML
-    private TableColumn<Player, String> diceColumn;
+    private TableColumn<InGameRow, String> diceColumn;
     @FXML
-    private TableColumn<Player, String> pointsColumn;
+    private TableColumn<InGameRow, String> pointsColumn;
+    @FXML
+    private TableColumn<InGameRow, String> activeColumn;
     @FXML
     private CheckBox box1;
     @FXML
@@ -52,8 +55,8 @@ public class InGameController implements Initializable {
     @FXML
     private Button surrender;
 
-    private ObservableList<Player> playersInGame = FXCollections.observableArrayList();
-    private Requestable serverCommunicator = new RequestControllerMocked();
+    private ObservableList<InGameRow> playersInGame = FXCollections.observableArrayList();
+    private Requestable serverCommunicator = new RequestController();
     private GameState gameState;
 
     @Override
@@ -61,6 +64,7 @@ public class InGameController implements Initializable {
         playerColumn.setCellValueFactory(dataValue -> dataValue.getValue().getPlayerNameProperties());
         diceColumn.setCellValueFactory(dataValue -> dataValue.getValue().getListOfDiceProperties());
         pointsColumn.setCellValueFactory(dataValue -> dataValue.getValue().getPointsProperties());
+        activeColumn.setCellValueFactory(dataValue -> dataValue.getValue().getActiveProperties());
 
         resultsTable.setEditable(false);
         resultsTable.setItems(playersInGame);
@@ -146,7 +150,11 @@ public class InGameController implements Initializable {
         //remove previous state
         resultsTable.getItems().removeAll(resultsTable.getItems());
         players.forEach(player -> {
-            this.playersInGame.add(player);
+            String active = "";
+            if(player.getName().equals(gameState.getActivePlayer())){
+                active = "A";
+            }
+            this.playersInGame.add(new InGameRow(player,active));
 
             if(player.getName().equals(Account.getInstance().getNick())){
 

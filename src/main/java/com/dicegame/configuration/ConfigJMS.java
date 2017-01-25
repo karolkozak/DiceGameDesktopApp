@@ -35,7 +35,8 @@ public class ConfigJMS {
     @Bean
     public ConnectionFactory connectionFactory(){
         ActiveMQConnectionFactory connectionFactory = new ActiveMQConnectionFactory();
-        connectionFactory.setBrokerURL(BROKER_URL);   // change to OUTER_BROKER_URL when actimeMQ run separately
+       // connectionFactory.setBrokerURL(BROKER_URL);   // change to OUTER_BROKER_URL when actimeMQ run separately
+        connectionFactory.setBrokerURL(OUTER_BROKER_URL);
         connectionFactory.setUserName(username);
         connectionFactory.setPassword(password);
         connectionFactory.setTrustAllPackages(true);

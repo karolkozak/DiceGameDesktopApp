@@ -1,19 +1,16 @@
 package com.dicegame.model;
 
-import javafx.beans.property.SimpleListProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 
 /**
  * Created by Karol on 13/12/2016.
  */
 public class Game {
 
-    private int gameID;
+    private Integer gameID;
     private GameType gameType;
-    private int placesLeft;
+    private Integer placesLeft;
     private GameState gameState;
 
     public Game(int gameID, GameType gameType, int placesLeft, GameState gameState) {
@@ -31,7 +28,7 @@ public class Game {
         return gameType;
     }
 
-    public int getPlacesLeft() {
+    public Integer getPlacesLeft() {
         return placesLeft;
     }
 
@@ -51,7 +48,7 @@ public class Game {
         return new SimpleStringProperty(gameState.getListOfPlayers().toString());
     }
 
-    public int getGameID() {
+    public Integer getGameID() {
         return gameID;
     }
 }

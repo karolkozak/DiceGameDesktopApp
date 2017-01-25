@@ -1,6 +1,5 @@
 package com.dicegame.model;
 
-import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 
 import java.util.List;
@@ -11,7 +10,7 @@ import java.util.List;
 public class Player {
 
     private String name;
-    private int points;
+    private Integer points;
     private List<Integer> dice;
 
     public Player(String name) {
@@ -24,7 +23,7 @@ public class Player {
         this.dice = dice;
     }
 
-    public int getPoints() {
+    public Integer getPoints() {
         return points;
     }
 

@@ -32,7 +32,7 @@ public class LoginController implements Initializable {
 
     }
 
-    Requestable serverCommunicator = new RequestControllerMocked();
+    Requestable serverCommunicator = new RequestController();
 
     @FXML
     public void handleLoginAction(ActionEvent actionEvent) throws IOException {
@@ -76,7 +76,7 @@ public class LoginController implements Initializable {
     }
 
     private boolean isValid(String nick){
-        return nick.matches("[^!$()-+~#@*+%{}<>\\[\\]|\"_^/\\\\]*");
+        return nick.matches("[^!$()-+~#@*+%{}<>\\[\\]|\"_^/\\\\]*") && !nick.equals("");
     }
 
 }
