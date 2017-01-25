@@ -59,7 +59,7 @@ public class CreateGameController implements Initializable {
     @FXML
     private Button createButton;
 
-    Requestable serverCommunicator = new RequestControllerMocked();
+    Requestable serverCommunicator = new RequestController();
 
     @FXML
     public void handleCreateGameAction(ActionEvent actionEvent) {

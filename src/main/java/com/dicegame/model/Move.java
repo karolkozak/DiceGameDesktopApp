@@ -7,13 +7,13 @@ import java.util.Set;
  */
 public class Move {
 
-    private Set<Integer> diceNumbers;
+    private Set<Integer> dice;
 
-    public Move( Set<Integer> diceNumbers) {
-        this.diceNumbers = diceNumbers;
+    public Move( Set<Integer> dice) {
+        this.dice = dice;
     }
 
-    public Set<Integer> getDiceNumbers() {
-        return diceNumbers;
+    public Set<Integer> getDice() {
+        return dice;
     }
 }

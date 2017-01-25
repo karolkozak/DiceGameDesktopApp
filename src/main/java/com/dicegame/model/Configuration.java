@@ -7,15 +7,15 @@ import java.util.List;
  */
 public class Configuration {
 
-    private int humansNum;
+    private Integer humansNum;
     private GameType gameType;
-    private int numberOfPointsToWin;
-    private List<BotConfiguration> listOfBotConfigurations;
+    private Integer numberOfPointsToWin;
+    private List<BotConfiguration> listOfBots;
 
-    public Configuration(int humansNum, GameType gameType, int numberOfPointsToWin, List<BotConfiguration> listOfBotConfigurations) {
+    public Configuration(int humansNum, GameType gameType, int numberOfPointsToWin, List<BotConfiguration> listOfBots) {
         this.humansNum = humansNum;
         this.gameType = gameType;
         this.numberOfPointsToWin = numberOfPointsToWin;
-        this.listOfBotConfigurations = listOfBotConfigurations;
+        this.listOfBots = listOfBots;
     }
 }
