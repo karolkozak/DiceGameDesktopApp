@@ -13,10 +13,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.CheckBox;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -54,6 +51,8 @@ public class InGameController implements Initializable {
     private Button pass;
     @FXML
     private Button surrender;
+    @FXML
+    private Label winningLabel;
 
     private ObservableList<InGameRow> playersInGame = FXCollections.observableArrayList();
     private Requestable serverCommunicator = new RequestController();
@@ -135,6 +134,20 @@ public class InGameController implements Initializable {
             mock=2;
         }
 
+        Player whoWon = this.gameState.getListOfPlayers().get(0);
+
+        for(Player player: this.gameState.getListOfPlayers()) {
+            if(whoWon.getPoints() > player.getPoints()) {
+                whoWon = player;
+            }
+        }
+
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Game finished!");
+        alert.setHeaderText(null);
+        alert.setContentText("Player: " + whoWon.getName() + " with: " + whoWon.getPoints() + " points.");
+        alert.showAndWait();
+
         System.out.println(this.gameState.getStatus().toString());
 
         System.out.println("FINITO");
@@ -147,6 +160,10 @@ public class InGameController implements Initializable {
     public void updateTable(GameState gameState) {
         List<Player> players = gameState.getListOfPlayers();
 
+
+        String toPrintLabel = gameState.getWinningNumber().equals(0) ? "" :gameState.getWinningNumber().toString();
+
+        Platform.runLater(() -> winningLabel.setText(toPrintLabel));
         //remove previous state
         resultsTable.getItems().removeAll(resultsTable.getItems());
         players.forEach(player -> {

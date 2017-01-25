@@ -185,9 +185,8 @@ public class RequestController implements Requestable {
 
     @Override
     public boolean quitGame(int gameID) {
-        JoinContainer joinContainer = new JoinContainer(Account.getInstance().getNick(), gameID);
-        System.out.println(new Gson().toJson(joinContainer));
-        jmsTemplate.convertAndSend("quitGame",joinContainer);
+
+        jmsTemplate.convertAndSend("quitGame",Account.getInstance().getNick());
         return true;
     }
 
