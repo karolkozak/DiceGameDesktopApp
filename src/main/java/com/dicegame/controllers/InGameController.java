@@ -90,11 +90,11 @@ public class InGameController implements Initializable {
 
     public void handleRollAction(ActionEvent actionEvent) {
         Set<Integer> move = new HashSet<Integer>();
-        if(box1.isSelected()) move.add(1);
-        if(box2.isSelected()) move.add(2);
-        if(box3.isSelected()) move.add(3);
-        if(box4.isSelected()) move.add(4);
-        if(box5.isSelected()) move.add(5);
+        if(box1.isSelected()) move.add(0);
+        if(box2.isSelected()) move.add(1);
+        if(box3.isSelected()) move.add(2);
+        if(box4.isSelected()) move.add(3);
+        if(box5.isSelected()) move.add(4);
 
         if(!move.isEmpty()) {
             serverCommunicator.makeMove(new Move(move));
@@ -146,7 +146,7 @@ public class InGameController implements Initializable {
         alert.setTitle("Game finished!");
         alert.setHeaderText(null);
         alert.setContentText("Player: " + whoWon.getName() + " with: " + whoWon.getPoints() + " points.");
-        alert.showAndWait();
+        Platform.runLater(() -> alert.showAndWait());
 
         System.out.println(this.gameState.getStatus().toString());
 

@@ -64,7 +64,7 @@ public class CreateGameController implements Initializable {
     @FXML
     public void handleCreateGameAction(ActionEvent actionEvent) {
 
-        createButton.setDisable(true);
+
 
         Alert alert = new Alert(AlertType.INFORMATION);
         alert.setHeaderText(null);
@@ -118,6 +118,7 @@ public class CreateGameController implements Initializable {
                                                         numberOfPointsToWin,
                                                         bots);
 
+        createButton.setDisable(true);
         new Thread(new Runnable() {
             @Override
             public void run() {
